@@ -1,2 +1,2 @@
-# entity.Reference-Manager
+# Reference-Manager
 PA165 team project
