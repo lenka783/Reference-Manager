@@ -71,4 +71,28 @@ public class User {
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
     }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object == this) {
+            return true;
+        }
+        if (object == null || !(object instanceof User)) {
+            return false;
+        }
+        User user = (User) object;
+        return id == user.getId() &&
+            username == user.getUsername() &&
+            email == user.getEmail();
+    }
+
+    @Override
+    public int hashCode() {
+        final int primeNumber = 17;
+        int resultHash = 1;
+        resultHash = primeNumber * resultHash + username.hashCode();
+        resultHash = primeNumber * resultHash + email.hashCode();
+        resultHash = primeNumber * resultHash + (lastName == null ? 0 : lastName.hashCode());
+        return resultHash;
+    }
 }
