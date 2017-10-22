@@ -2,6 +2,11 @@ package entity;
 
 import javax.persistence.*;
 
+/**
+ * @author Jan Bílek
+ * @since 2017-10-22
+ **/
+
 @Entity
 @Table(name = "Users")
 public class User {
