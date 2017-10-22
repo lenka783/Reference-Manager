@@ -81,9 +81,8 @@ public class User {
             return false;
         }
         User user = (User) object;
-        return id == user.getId() &&
-            username == user.getUsername() &&
-            email == user.getEmail();
+        return username == user.getUsername() &&
+               email == user.getEmail();
     }
 
     @Override
