@@ -1,6 +1,8 @@
 package entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Jan Bílek
@@ -27,6 +29,12 @@ public class User {
 
     @Column(nullable = false)
     private String passwordHash;
+
+    @OneToMany
+    private Set<Tag> tags = new HashSet<>();
+
+    @OneToMany
+    private Set<Reference> references = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -82,7 +90,7 @@ public class User {
         }
         User user = (User) object;
         return username == user.getUsername() &&
-               email == user.getEmail();
+            email == user.getEmail();
     }
 
     @Override
@@ -94,4 +102,5 @@ public class User {
         resultHash = primeNumber * resultHash + (lastName == null ? 0 : lastName.hashCode());
         return resultHash;
     }
+
 }
