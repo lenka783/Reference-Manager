@@ -1,14 +1,11 @@
 package entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Objects;
 
 /**
  * Class representing a Note entity
- * This class is used for adding an extra note to references. 
+ * This class is used for adding an extra note to references.
  * @author Andrej Staruch
  */
 
@@ -18,34 +15,32 @@ public class Note {
     @Id
     @GeneratedValue
     private Long id;
-    
+
     private String text;
 
-    private User creator;
-    
-    @OneToMany(mappedBy = "references")
-    private Reference reference;
-    
+    @Column(nullable = false)
+    private Long userId;
+
     public Long getId() {
         return id;
     }
-    
+
     public String getText() {
         return text;
     }
-    
+
     public void setText(String text) {
         this.text = text;
     }
-    
-    public User getCreator() {
-        return creator;
+
+    public Long getUserId() {
+        return userId;
     }
-    
-    public void setCreator(User creator) {
-        this.creator = creator;
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
-    
+
     @Override
     public boolean equals(Object object) {
         if (object == this) {
@@ -55,16 +50,16 @@ public class Note {
             return false;
         }
         Note note = (Note) object;
-        return text.equals(note.getText()) && creator == note.getCreator();
+        return text.equals(note.getText()) && Objects.equals(userId, note.getUserId());
     }
-    
+
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + (text != null ? text.hashCode() : 0);
-        result = prime * result + creator.hashCode();
+        result = prime * result + userId.hashCode();
         return result;
     }
-    
+
 }
