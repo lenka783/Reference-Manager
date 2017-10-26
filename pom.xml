@@ -54,18 +54,6 @@
             <artifactId>javax.el</artifactId>
             <version>3.0.1-b08</version>
         </dependency>
-        <dependency>
-            <groupId>dom4j</groupId>
-            <artifactId>dom4j</artifactId>
-            <version>1.6.1</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate.javax.persistence</groupId>
-            <artifactId>hibernate-jpa-2.1-api</artifactId>
-            <version>1.0.0.Final</version>
-            <type>jar</type>
-        </dependency>
     </dependencies>
 
 </project>
