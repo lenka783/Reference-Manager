@@ -1565,7 +1565,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+user: User",
+											"text": "+creator: User",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -7994,7 +7994,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFfRbkIwf2MYWU="
 							},
-							"name": "user",
+							"name": "creator",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,

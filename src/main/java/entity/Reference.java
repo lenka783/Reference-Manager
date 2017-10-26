@@ -1,7 +1,6 @@
 package entity;
 
 import javax.persistence.*;
-import javax.
 import javax.validation.constraints.Pattern;
 import java.util.ArrayList;
 import java.util.HashSet;
