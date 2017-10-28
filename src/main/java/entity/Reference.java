@@ -16,6 +16,7 @@ import java.util.Set;
 public class Reference {
 
     @Id
+    @Column(name = "REFERENCE_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
