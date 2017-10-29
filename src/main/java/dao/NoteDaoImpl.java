@@ -16,7 +16,7 @@ public class NoteDaoImpl implements NoteDao {
     @Override
     public void create(Note note) {
         em.persist(note);
-    }x
+    }
 
     @Override
     public void update(Note note) {
