@@ -18,27 +18,12 @@ public class Note {
 
     private String text;
 
-    @Column(nullable = false)
-    private Long userId;
-
-    public Long getId() {
-        return id;
-    }
-
     public String getText() {
         return text;
     }
 
     public void setText(String text) {
         this.text = text;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
     }
 
     @Override
@@ -50,7 +35,7 @@ public class Note {
             return false;
         }
         Note note = (Note) object;
-        return text.equals(note.getText()) && Objects.equals(userId, note.getUserId());
+        return text.equals(note.getText());
     }
 
     @Override
@@ -58,7 +43,6 @@ public class Note {
         final int prime = 31;
         int result = 1;
         result = prime * result + (text != null ? text.hashCode() : 0);
-        result = prime * result + userId.hashCode();
         return result;
     }
 
