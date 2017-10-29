@@ -1,17 +1,22 @@
 package dao;
 
 import entity.Note;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
  * @author Lenka Šmitalová
  */
+@Repository
+@Transactional
 public class NoteDaoImpl implements NoteDao {
+
     @PersistenceContext
-    EntityManager em;
+    private EntityManager em;
 
     @Override
     public void create(Note note) {
