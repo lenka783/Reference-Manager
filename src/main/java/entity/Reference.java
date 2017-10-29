@@ -1,7 +1,6 @@
 package entity;
 
 import javax.persistence.*;
-import javax.
 import javax.validation.constraints.Pattern;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -17,6 +16,7 @@ import java.util.Set;
 public class Reference {
 
     @Id
+    @Column(name = "REFERENCE_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
