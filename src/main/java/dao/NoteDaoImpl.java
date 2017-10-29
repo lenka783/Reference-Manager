@@ -31,7 +31,7 @@ public class NoteDaoImpl implements NoteDao {
     @Override
     public void remove(Note note) {
         Note managed = em.merge(note);
-        em.detach(managed);
+        em.remove(managed);
     }
 
     @Override
