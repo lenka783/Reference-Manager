@@ -113,6 +113,15 @@ public class ReferenceDaoTest {
             expectedReferences, references);
     }
 
+    @Test
+    public void testFindById() {
+        Reference reference = getTestReference();
+        em.persist(reference);
+
+        Reference foundReference = referenceDao.findById(reference.getId());
+        assertEquals(reference, foundReference);
+    }
+
     private List<Reference> getAllPersistedReferences() {
         return em.createQuery("select r from Reference r", Reference.class).getResultList();
     }
