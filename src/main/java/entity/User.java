@@ -1,7 +1,9 @@
 package entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -18,14 +20,10 @@ public class User {
     private Long id;
 
     @Column(nullable = false, unique = true)
-    private String username;
-
-    private String firstName;
-
-    private String lastName;
-
-    @Column(nullable = false)
+    @Email
     private String email;
+
+    private String name;
 
     @Column(nullable = false)
     private String passwordHash;
@@ -40,36 +38,20 @@ public class User {
         return id;
     }
 
-    public String getUsername() {
-        return username;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
+    public String getName() {
+        return name;
     }
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public String getPasswordHash() {
@@ -89,17 +71,15 @@ public class User {
             return false;
         }
         User user = (User) object;
-        return username == user.getUsername() &&
-            email == user.getEmail();
+        return Objects.equals(email, user.getEmail());
     }
 
     @Override
     public int hashCode() {
         final int primeNumber = 17;
         int resultHash = 1;
-        resultHash = primeNumber * resultHash + username.hashCode();
         resultHash = primeNumber * resultHash + email.hashCode();
-        resultHash = primeNumber * resultHash + (lastName == null ? 0 : lastName.hashCode());
+        resultHash = primeNumber * resultHash + (name == null ? 0 : name.hashCode());
         return resultHash;
     }
 
