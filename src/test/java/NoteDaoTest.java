@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import java.util.HashSet;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -37,7 +38,7 @@ public class NoteDaoTest {
     public void testUpdateNoteSuccess() {
         Note note = new Note();
         note.setText("Original text");
-        noteDao.create(note);
+        em.persist(note);
         note.setText("New text");
         noteDao.update(note);
         Note foundNote = em.find(Note.class,note.getId());
@@ -48,7 +49,7 @@ public class NoteDaoTest {
     public void testDeleteNoteSuccess() {
         Note note = new Note();
         note.setText("Test note");
-        noteDao.create(note);
+        em.persist(note);
         Note foundNote = em.find(Note.class,note.getId());
         Assert.assertTrue(foundNote.equals(note));
         noteDao.remove(note);
@@ -60,5 +61,27 @@ public class NoteDaoTest {
     public void testDeleteNoteFail(){
         Note note = new Note();
         noteDao.remove(note);
+    }
+
+    @Test
+    public void testFindAllNotes(){
+        Note note = new Note();
+        Note note2 = new Note();
+        note.setText("First note text.");
+        note2.setText("Second note text");
+        em.persist(note);
+        em.persist(note2);
+
+        HashSet<Note> foundNotes = new HashSet<>(noteDao.findAll());
+        HashSet<Note> expectedNotes = new HashSet<>(em.createQuery("select n from Note n").getResultList());
+        Assert.assertTrue(expectedNotes.equals(foundNotes));
+    }
+
+    @Test
+    public void testFindNoteById(){
+        Note note = new Note();
+        em.persist(note);
+        Note foundNote = noteDao.findById(note.getId());
+        Assert.assertTrue(note.equals(foundNote));
     }
 }

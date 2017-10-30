@@ -30,8 +30,8 @@ public class ReferenceDaoImpl implements ReferenceDao {
 
     @Override
     public void remove(Reference r) {
-        Reference managed = em.merge(r);
-        em.remove(managed);
+        Reference reference = em.find(Reference.class,r.getId());
+        em.remove(reference);
     }
 
     @Override
