@@ -12,7 +12,7 @@ import java.util.Set;
  * @author Lenka Šmitalová
  */
 @Entity
-@Table(name = "References")
+@Table(name = "References_table")
 public class Reference {
 
     @Id
