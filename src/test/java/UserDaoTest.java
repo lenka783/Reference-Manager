@@ -117,9 +117,9 @@ public class UserDaoTest {
         user2.setPasswordHash("password");
         em.persist(user2);
         em.detach(user2);
-
         user2.setEmail(user1.getEmail());
-        userDao.update(user2);
+        em.merge(user2);
+        List<User> users = em.createQuery("SELECT u FROM User u", User.class).getResultList();
     }
 
     @Test
