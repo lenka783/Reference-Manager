@@ -9,6 +9,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -41,11 +42,11 @@ public class Tag {
 
         Tag tag = (Tag) o;
 
-        return name.equals(tag.name);
+        return Objects.equals(name, tag.name);
     }
 
     @Override
     public int hashCode() {
-        return name.hashCode();
+        return Objects.hashCode(name);
     }
 }
