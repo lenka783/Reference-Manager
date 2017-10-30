@@ -7,6 +7,9 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
+/**
+ * @author David Šarman
+ */
 public class UserDaoImpl implements UserDao{
     @PersistenceContext
     private EntityManager em;
@@ -23,7 +26,7 @@ public class UserDaoImpl implements UserDao{
 
     @Override
     public void remove(User u) {
-        User managed = em.merge(u);
+        User managed = em.find(User.class, u.getId());
         em.remove(managed);
     }
 
