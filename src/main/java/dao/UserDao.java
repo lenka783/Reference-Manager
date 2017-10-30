@@ -4,6 +4,9 @@ import entity.User;
 
 import java.util.List;
 
+/**
+ * @author David Šarman
+ */
 public interface UserDao {
     void create(User u);
 
