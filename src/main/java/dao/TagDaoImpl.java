@@ -1,15 +1,18 @@
 package dao;
 
 import entity.Tag;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
  * @author Andrej Staruch
  */
-
+@Repository
+@Transactional
 public class TagDaoImpl implements TagDao {
     @PersistenceContext
     EntityManager em;
@@ -26,7 +29,7 @@ public class TagDaoImpl implements TagDao {
 
     @Override
     public void remove(Tag t) {
-        Tag managed = em.merge(t);
+        Tag managed = em.find(Tag.class, t.getId());
         em.remove(managed);
     }
 

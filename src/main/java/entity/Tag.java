@@ -1,13 +1,6 @@
 package entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -20,7 +13,7 @@ import java.util.Set;
 @Table(name = "Tags")
 public class Tag {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "TAG_ID")
     private Long id;
 
@@ -34,6 +27,26 @@ public class Tag {
         inverseJoinColumns = { @JoinColumn(name = "REFERENCE_ID") }
     )
     private Set<Reference> references = new HashSet<>();
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Set<Reference> getReferences() {
+        return references;
+    }
+
+    public void setReferences(Set<Reference> references) {
+        this.references = references;
+    }
 
     @Override
     public boolean equals(Object o) {
