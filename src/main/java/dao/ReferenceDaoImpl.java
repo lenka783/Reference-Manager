@@ -1,16 +1,19 @@
 package dao;
 
 import entity.Reference;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
  * @author Jan Bílek
  * @since 2017-10-28
  **/
-
+@Repository
+@Transactional
 public class ReferenceDaoImpl implements ReferenceDao {
     @PersistenceContext
     EntityManager em;
