@@ -2,57 +2,63 @@ import dao.NoteDao;
 import entity.Note;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = PersistenceApplicationContext.class)
+@Transactional
 public class NoteDaoTest {
 
     @Inject
     private NoteDao noteDao;
 
+    @PersistenceContext
+    private EntityManager em;
+
     @Test
-    @Transactional
-    @Rollback(true)
-    public void createNoteTest(){
+    public void testCreateNoteSuccess() {
         Note note = new Note();
         note.setText("Test note");
         noteDao.create(note);
-        List<Note> foundNotes = noteDao.findAll();
-        Assert.assertEquals(1,foundNotes.size());
-        Assert.assertEquals("Test note",foundNotes.get(0).getText());
+        Assert.assertNotNull(note.getId());
+        Note foundNote = em.find(Note.class,note.getId());
+        Assert.assertTrue(note.equals(foundNote));
     }
 
     @Test
-    @Transactional
-    @Rollback(true)
-    public void updateNoteTest(){
+    public void testUpdateNoteSuccess() {
         Note note = new Note();
         note.setText("Original text");
         noteDao.create(note);
         note.setText("New text");
         noteDao.update(note);
-        List<Note> foundNotes = noteDao.findAll();
-        Assert.assertEquals("New text",foundNotes.get(0).getText());
+        Note foundNote = em.find(Note.class,note.getId());
+        Assert.assertEquals("New text", foundNote.getText());
     }
 
     @Test
-    @Transactional
-    @Rollback(true)
-    public void deleteNoteTest(){
+    public void testDeleteNoteSuccess() {
         Note note = new Note();
         note.setText("Test note");
         noteDao.create(note);
-        List<Note> foundNotes = noteDao.findAll();
-        Assert.assertEquals(1,foundNotes.size());
+        Note foundNote = em.find(Note.class,note.getId());
+        Assert.assertTrue(foundNote.equals(note));
         noteDao.remove(note);
-        foundNotes = noteDao.findAll();
-        Assert.assertEquals(0,foundNotes.size());
+        foundNote = em.find(Note.class,note.getId());
+        Assert.assertEquals(null, foundNote);
+    }
+
+    @Test(expected=IllegalArgumentException.class)
+    public void testDeleteNoteFail(){
+        Note note = new Note();
+        noteDao.remove(note);
     }
 }

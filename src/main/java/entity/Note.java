@@ -12,11 +12,16 @@ import java.util.Objects;
 @Entity
 @Table(name = "Notes")
 public class Note {
+
     @Id
     @GeneratedValue
     private Long id;
 
     private String text;
+
+    public Long getId() {
+        return id;
+    }
 
     public String getText() {
         return text;
