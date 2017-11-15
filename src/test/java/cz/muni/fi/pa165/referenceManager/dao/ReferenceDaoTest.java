@@ -1,5 +1,6 @@
-import dao.ReferenceDao;
-import entity.Reference;
+import cz.muni.fi.pa165.referenceManager.PersistenceApplicationContext;
+import cz.muni.fi.pa165.referenceManager.dao.ReferenceDao;
+import cz.muni.fi.pa165.referenceManager.entity.Reference;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;

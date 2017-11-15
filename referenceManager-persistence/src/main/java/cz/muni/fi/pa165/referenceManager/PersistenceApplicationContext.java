@@ -1,4 +1,5 @@
-import dao.UserDao;
+package cz.muni.fi.pa165.referenceManager;
+
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -17,7 +18,7 @@ import javax.sql.DataSource;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories
-@ComponentScan( basePackages = "dao")
+@ComponentScan( basePackages = "cz.muni.fi.pa165.referenceManager.dao")
 public class PersistenceApplicationContext {
     @Bean
     public JpaTransactionManager transactionManager(){

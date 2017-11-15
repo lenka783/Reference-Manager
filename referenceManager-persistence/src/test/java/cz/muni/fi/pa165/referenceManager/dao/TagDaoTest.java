@@ -1,7 +1,10 @@
-import dao.ReferenceDao;
-import dao.TagDao;
-import entity.Reference;
-import entity.Tag;
+package cz.muni.fi.pa165.referenceManager.dao;
+
+import cz.muni.fi.pa165.referenceManager.PersistenceApplicationContext;
+import cz.muni.fi.pa165.referenceManager.dao.ReferenceDao;
+import cz.muni.fi.pa165.referenceManager.dao.TagDao;
+import cz.muni.fi.pa165.referenceManager.entity.Reference;
+import cz.muni.fi.pa165.referenceManager.entity.Tag;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,6 +19,9 @@ import javax.persistence.PersistenceException;
 import javax.transaction.Transactional;
 import java.util.*;
 
+/**
+ * @author Lenka Šmitalová
+ */
 @ContextConfiguration(classes = PersistenceApplicationContext.class)
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
