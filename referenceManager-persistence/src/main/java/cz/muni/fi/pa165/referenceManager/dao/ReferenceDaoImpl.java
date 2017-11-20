@@ -13,7 +13,6 @@ import java.util.List;
  * @since 2017-10-28
  **/
 @Repository
-@Transactional
 public class ReferenceDaoImpl implements ReferenceDao {
     @PersistenceContext
     EntityManager em;

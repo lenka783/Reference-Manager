@@ -13,7 +13,6 @@ import java.util.List;
  * @author David Šarman
  */
 @Repository
-@Transactional
 public class UserDaoImpl implements UserDao{
     @PersistenceContext
     private EntityManager em;

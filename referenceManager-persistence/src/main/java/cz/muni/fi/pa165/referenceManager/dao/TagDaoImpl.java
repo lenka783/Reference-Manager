@@ -12,7 +12,6 @@ import java.util.List;
  * @author Andrej Staruch
  */
 @Repository
-@Transactional
 public class TagDaoImpl implements TagDao {
     @PersistenceContext
     EntityManager em;

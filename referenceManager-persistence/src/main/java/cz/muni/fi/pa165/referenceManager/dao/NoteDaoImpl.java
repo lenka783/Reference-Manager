@@ -12,7 +12,6 @@ import java.util.List;
  * @author Lenka Šmitalová
  */
 @Repository
-@Transactional
 public class NoteDaoImpl implements NoteDao {
 
     @PersistenceContext
