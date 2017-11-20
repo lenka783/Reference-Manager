@@ -22,8 +22,8 @@ public class TagDaoImpl implements TagDao {
     }
 
     @Override
-    public void update(Tag t) {
-        em.merge(t);
+    public Tag update(Tag t) {
+        return em.merge(t);
     }
 
     @Override

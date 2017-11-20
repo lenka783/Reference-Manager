@@ -7,7 +7,7 @@ import java.util.List;
 public interface ReferenceDao {
     void create(Reference r);
 
-    void update(Reference r);
+    Reference update(Reference r);
 
     void remove(Reference r);
 

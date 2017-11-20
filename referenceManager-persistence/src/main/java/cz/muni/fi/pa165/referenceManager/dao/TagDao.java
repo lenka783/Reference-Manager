@@ -10,7 +10,7 @@ import java.util.List;
 public interface TagDao {
     void create(Tag t);
 
-    void update(Tag t);
+    Tag update(Tag t);
 
     void remove(Tag t);
 

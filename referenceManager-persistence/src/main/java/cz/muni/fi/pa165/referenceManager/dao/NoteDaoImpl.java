@@ -23,8 +23,8 @@ public class NoteDaoImpl implements NoteDao {
     }
 
     @Override
-    public void update(Note note) {
-        em.merge(note);
+    public Note update(Note note) {
+        return em.merge(note);
     }
 
     @Override

@@ -10,7 +10,7 @@ import java.util.List;
 public interface UserDao {
     void create(User u);
 
-    void update(User u);
+    User update(User u);
 
     void remove(User u);
 

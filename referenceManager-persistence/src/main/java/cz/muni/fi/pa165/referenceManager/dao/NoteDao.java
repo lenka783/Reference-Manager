@@ -8,7 +8,7 @@ public interface NoteDao {
 
     void create(Note note);
 
-    void update(Note note);
+    Note update(Note note);
 
     void remove(Note note);
 

@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -23,8 +22,8 @@ public class ReferenceDaoImpl implements ReferenceDao {
     }
 
     @Override
-    public void update(Reference r) {
-        em.merge(r);
+    public Reference update(Reference r) {
+        return em.merge(r);
     }
 
     @Override
