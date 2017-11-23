@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.referenceManager.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -19,13 +20,15 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
+    @NotNull
     @Email
     private String email;
 
+    @NotNull
     private String name;
 
-    @Column(nullable = false)
+    @NotNull
     private String passwordHash;
 
     @OneToMany
