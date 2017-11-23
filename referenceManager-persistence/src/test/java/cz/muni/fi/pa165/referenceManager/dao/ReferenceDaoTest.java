@@ -39,17 +39,6 @@ public class ReferenceDaoTest {
     }
 
     @Test
-    public void testReferenceValidationWithBadPagesPatternError() {
-        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
-
-        Reference reference = new Reference();
-        reference.setTitle("Test title");
-        reference.setPages("not a range of pages");
-        Set<ConstraintViolation<Reference>> violations = validator.validate(reference);
-        assertEquals("There should be one constraint violation for the pages field", 1, violations.size());
-    }
-
-    @Test
     public void testNewReferenceSuccess() {
         Reference reference = getTestReference();
         referenceDao.create(reference);
@@ -67,7 +56,8 @@ public class ReferenceDaoTest {
 
         reference.setTitle("Modified test reference");
         reference.setAuthors(new ArrayList<>());
-        reference.setPages("0-1");
+        reference.setPagesStart(0);
+        reference.setPagesEnd(1);
         reference.setVenue("New test venue");
 
         referenceDao.update(reference);
@@ -136,7 +126,8 @@ public class ReferenceDaoTest {
         authors.add("Author One");
         authors.add("Author Two");
         reference.setAuthors(authors);
-        reference.setPages("50-55");
+        reference.setPagesStart(50);
+        reference.setPagesEnd(55);
         reference.setVenue("Test venue");
 
         return reference;

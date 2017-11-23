@@ -28,8 +28,8 @@ public class Reference {
 
     private String venue;
 
-    @Pattern(regexp = "(\\d+(-\\d+)?)(,\\d+(-\\d+)?)*")
-    private String pages;
+    private Integer pagesStart;
+    private Integer pagesEnd;
 
     @OneToMany
     private Set<Note> notes = new HashSet<Note>();
@@ -62,12 +62,20 @@ public class Reference {
         this.venue = venue;
     }
 
-    public String getPages() {
-        return pages;
+    public Integer getPagesStart() {
+        return pagesStart;
     }
 
-    public void setPages(String pages) {
-        this.pages = pages;
+    public void setPagesStart(Integer pagesStart) {
+        this.pagesStart = pagesStart;
+    }
+
+    public Integer getPagesEnd() {
+        return pagesEnd;
+    }
+
+    public void setPagesEnd(Integer pagesEnd) {
+        this.pagesEnd = pagesEnd;
     }
 
     @Override
@@ -80,16 +88,17 @@ public class Reference {
         if (!title.equals(reference.title)) return false;
         if (!authors.equals(reference.authors)) return false;
         if (venue != null ? !venue.equals(reference.venue) : reference.venue != null) return false;
-        return pages != null ? pages.equals(reference.pages) : reference.pages == null;
+        if (pagesStart != null ? !pagesStart.equals(reference.pagesStart) : reference.pagesStart != null) return false;
+        return pagesEnd != null ? pagesEnd.equals(reference.pagesEnd) : reference.pagesEnd == null;
     }
 
     @Override
     public int hashCode() {
-        int prime = 31;
         int result = title.hashCode();
-        result = prime * result + authors.hashCode();
-        result = prime * result + (venue != null ? venue.hashCode() : 0);
-        result = prime * result + (pages != null ? pages.hashCode() : 0);
+        result = 31 * result + authors.hashCode();
+        result = 31 * result + (venue != null ? venue.hashCode() : 0);
+        result = 31 * result + (pagesStart != null ? pagesStart.hashCode() : 0);
+        result = 31 * result + (pagesEnd != null ? pagesEnd.hashCode() : 0);
         return result;
     }
 }

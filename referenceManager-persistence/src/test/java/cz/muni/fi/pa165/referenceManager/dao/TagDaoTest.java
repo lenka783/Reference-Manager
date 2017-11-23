@@ -46,7 +46,8 @@ public class TagDaoTest {
     public void createTags() {
         r1 = new Reference();
         r1.setTitle("Reference 1");
-        r1.setPages("21-30");
+        r1.setPagesStart(21);
+        r1.setPagesEnd(30);
         r1.setAuthors(Arrays.asList("author1", "author2"));
         r1.setVenue("Reference 1 venue");
 
