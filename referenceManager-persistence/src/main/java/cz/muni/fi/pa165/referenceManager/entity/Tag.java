@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.referenceManager.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -17,7 +18,7 @@ public class Tag {
     @Column(name = "TAG_ID")
     private Long id;
 
-    @Column(nullable = false)
+    @NotNull
     private String name;
 
     @ManyToMany()

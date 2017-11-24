@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.referenceManager.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 /**
  * Class representing a Note cz.muni.fi.pa165.referenceManager.entity
@@ -16,6 +17,7 @@ public class Note {
     @GeneratedValue
     private Long id;
 
+    @NotNull
     private String text;
 
     public Long getId() {
