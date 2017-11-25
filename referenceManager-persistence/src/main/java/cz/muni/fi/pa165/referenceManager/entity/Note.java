@@ -35,7 +35,7 @@ public class Note {
         if (object == this) {
             return true;
         }
-        if (object == null | !(object instanceof Note)) {
+        if (object == null || !(object instanceof Note)) {
             return false;
         }
         Note note = (Note) object;
