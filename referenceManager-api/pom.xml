@@ -25,6 +25,11 @@
         </plugins>
     </build>
     <dependencies>
+        <dependency>
+            <groupId>cz.muni.fi.pa165.referenceManager</groupId>
+            <artifactId>referenceManager-persistence</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
     </dependencies>
 
 </project>
