@@ -15,5 +15,5 @@ public interface UserFacade {
 
     Collection<UserDTO> getAllUsers();
 
-    boolean login(UserLoginDTO user);
+    boolean authenticate(UserLoginDTO user);
 }
