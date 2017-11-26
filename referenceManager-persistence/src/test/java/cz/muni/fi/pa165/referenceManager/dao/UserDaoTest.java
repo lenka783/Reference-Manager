@@ -72,10 +72,11 @@ public class UserDaoTest {
 
         User user = new User();
         user.setEmail("user#example.com");
+        user.setName("user");
         user.setPasswordHash("password");
         Set<ConstraintViolation<User>> violations = validator.validate(user);
         assertEquals("There should be one constraint violation for the email " +
-            "field", 2, violations.size());
+            "field", 1, violations.size());
     }
 
     @Test
