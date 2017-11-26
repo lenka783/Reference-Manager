@@ -23,8 +23,8 @@
     </build>
 
     <modules>
-        <module>referenceManager-persistence</module>
         <module>referenceManager-api</module>
+        <module>referenceManager-persistence</module>
         <module>referenceManager-service</module>
     </modules>
 </project>
