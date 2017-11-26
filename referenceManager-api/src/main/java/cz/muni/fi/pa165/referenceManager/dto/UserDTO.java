@@ -2,6 +2,10 @@ package cz.muni.fi.pa165.referenceManager.dto;
 
 import java.util.Set;
 
+/**
+ * @author Jan Bílek
+ */
+
 public class UserDTO {
 
     private Long id;

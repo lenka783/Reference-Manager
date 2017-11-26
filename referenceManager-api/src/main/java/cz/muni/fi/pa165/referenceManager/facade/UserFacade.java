@@ -7,6 +7,9 @@ import cz.muni.fi.pa165.referenceManager.dto.UserLoginDTO;
 
 import java.util.Collection;
 
+/**
+ * @author Jan Bílek
+ */
 public interface UserFacade {
 
     UserDTO findUserById(Long id);

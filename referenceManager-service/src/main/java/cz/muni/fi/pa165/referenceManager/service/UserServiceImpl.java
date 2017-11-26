@@ -10,6 +10,10 @@ import org.springframework.stereotype.Service;
 import javax.inject.Inject;
 import java.util.Collection;
 
+/**
+ * @author Jan Bílek
+ */
+
 @Service
 public class UserServiceImpl implements UserService {
 

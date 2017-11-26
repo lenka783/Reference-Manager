@@ -9,6 +9,10 @@ import java.util.List;
 
 import org.dozer.Mapper;
 
+/**
+ * @author Jan Bílek
+ */
+
 @Service
 public class MappingServiceImpl {
 

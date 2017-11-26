@@ -5,6 +5,10 @@ import org.dozer.Mapper;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * @author Jan Bílek
+ */
+
 public interface MappingService {
 
     public <T> List<T> mapTo(Collection<?> objects, Class<T> mapToClass);

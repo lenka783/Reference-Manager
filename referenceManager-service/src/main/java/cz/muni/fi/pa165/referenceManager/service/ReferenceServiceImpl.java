@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import javax.inject.Inject;
 import java.util.List;
 
-
+/**
+ * @author Jan Bílek
+ */
 @Service
 public class ReferenceServiceImpl implements ReferenceService {
 
@@ -36,7 +38,7 @@ public class ReferenceServiceImpl implements ReferenceService {
     }
 
     @Override
-    public  Reference findById(Long id){
+    public Reference findById(Long id) {
         return referenceDao.findById(id);
     }
 
@@ -46,7 +48,7 @@ public class ReferenceServiceImpl implements ReferenceService {
     }
 
     @Override
-    public void removeNote(Reference reference, Note note){
+    public void removeNote(Reference reference, Note note) {
         reference.removeNote(note);
     }
 }

@@ -7,6 +7,10 @@ import org.hibernate.service.spi.InjectService;
 
 import java.util.Collection;
 
+/**
+ * @author Jan Bílek
+ */
+
 public interface UserService {
 
     User findUserById(Long id);

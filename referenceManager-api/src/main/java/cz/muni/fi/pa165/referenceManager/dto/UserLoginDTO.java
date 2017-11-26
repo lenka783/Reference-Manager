@@ -1,5 +1,9 @@
 package cz.muni.fi.pa165.referenceManager.dto;
 
+/**
+ * @author Jan Bílek
+ */
+
 public class UserLoginDTO {
 
     private String email;
