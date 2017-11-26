@@ -75,4 +75,32 @@ public class ReferenceDTO {
         this.notes = notes;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ReferenceDTO)) return false;
+
+        ReferenceDTO that = (ReferenceDTO) o;
+
+        if (getId() != null ? !getId().equals(that.getId()) : that.getId() != null) return false;
+        if (getTitle() != null ? !getTitle().equals(that.getTitle()) : that.getTitle() != null) return false;
+        if (getAuthors() != null ? !getAuthors().equals(that.getAuthors()) : that.getAuthors() != null) return false;
+        if (getNotes() != null ? !getNotes().equals(that.getNotes()) : that.getNotes() != null) return false;
+        if (getVenue() != null ? !getVenue().equals(that.getVenue()) : that.getVenue() != null) return false;
+        if (getPagesStart() != null ? !getPagesStart().equals(that.getPagesStart()) : that.getPagesStart() != null)
+            return false;
+        return getPagesEnd() != null ? getPagesEnd().equals(that.getPagesEnd()) : that.getPagesEnd() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getId() != null ? getId().hashCode() : 0;
+        result = 31 * result + (getTitle() != null ? getTitle().hashCode() : 0);
+        result = 31 * result + (getAuthors() != null ? getAuthors().hashCode() : 0);
+        result = 31 * result + (getNotes() != null ? getNotes().hashCode() : 0);
+        result = 31 * result + (getVenue() != null ? getVenue().hashCode() : 0);
+        result = 31 * result + (getPagesStart() != null ? getPagesStart().hashCode() : 0);
+        result = 31 * result + (getPagesEnd() != null ? getPagesEnd().hashCode() : 0);
+        return result;
+    }
 }
