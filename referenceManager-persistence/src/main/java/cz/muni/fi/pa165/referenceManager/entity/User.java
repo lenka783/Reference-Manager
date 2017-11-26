@@ -65,6 +65,22 @@ public class User {
         this.passwordHash = passwordHash;
     }
 
+    public void addReference(Reference reference){
+        references.add(reference);
+    }
+
+    public void removeReference(Reference reference){
+        references.remove(reference);
+    }
+
+    public void addTag(Tag tag){
+        tags.add(tag);
+    }
+
+    public void removeTag(Tag tag){
+        tags.remove(tag);
+    }
+
     @Override
     public boolean equals(Object object) {
         if (object == this) {

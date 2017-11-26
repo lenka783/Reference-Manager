@@ -1,6 +1,8 @@
 package cz.fi.muni.pa165.referenceManager.service;
 
 import cz.muni.fi.pa165.referenceManager.dao.UserDao;
+import cz.muni.fi.pa165.referenceManager.entity.Reference;
+import cz.muni.fi.pa165.referenceManager.entity.Tag;
 import cz.muni.fi.pa165.referenceManager.entity.User;
 import org.jasypt.util.password.ConfigurablePasswordEncryptor;
 import org.springframework.stereotype.Service;
@@ -36,21 +38,42 @@ public class UserServiceImpl implements UserService {
     }
 
     public boolean authenticate(User user, String password) {
-        return verifyPassword(user.getPasswordHash(),password);
+        return verifyPassword(user.getPasswordHash(), password);
     }
 
-    private boolean verifyPassword(String password, String correctPasswordHash){
-        if(password == null){
+    @Override
+    public void addReference(User user, Reference reference) {
+        user.addReference(reference);
+    }
+
+    @Override
+    public void removeReference(User user, Reference reference) {
+        user.removeReference(reference);
+    }
+
+    @Override
+    public void addTag(User user, Tag tag) {
+        user.addTag(tag);
+    }
+
+    @Override
+    public void removeTag(User user, Tag tag) {
+        user.removeTag(tag);
+    }
+
+    private boolean verifyPassword(String password, String correctPasswordHash) {
+        if (password == null) {
             return false;
         }
-        if(correctPasswordHash == null){
+        if (correctPasswordHash == null) {
             throw new IllegalArgumentException("Password hash cannot be null.");
         }
-        return passwordEncryptor.checkPassword(correctPasswordHash,password);
+        return passwordEncryptor.checkPassword(correctPasswordHash, password);
 
 
     }
-    private String createPasswordHash(String password){
+
+    private String createPasswordHash(String password) {
         return passwordEncryptor.encryptPassword(password);
     }
 }

@@ -1,5 +1,7 @@
 package cz.fi.muni.pa165.referenceManager.facade;
 
+import cz.fi.muni.pa165.referenceManager.dto.ReferenceDTO;
+import cz.fi.muni.pa165.referenceManager.dto.TagDTO;
 import cz.fi.muni.pa165.referenceManager.dto.UserDTO;
 import cz.fi.muni.pa165.referenceManager.dto.UserLoginDTO;
 
@@ -16,4 +18,12 @@ public interface UserFacade {
     Collection<UserDTO> getAllUsers();
 
     boolean authenticate(UserLoginDTO user);
+
+    void addReference(Long userId, ReferenceDTO reference);
+
+    void removeReference(Long userId, ReferenceDTO reference);
+
+    void addTag(Long userId, TagDTO tag);
+
+    void removeTag(Long userId, TagDTO tag);
 }
