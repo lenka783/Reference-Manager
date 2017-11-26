@@ -1,9 +1,10 @@
-package cz.fi.muni.pa165.referenceManager.facade;
+package cz.fi.muni.pa165.referenceManager.service.facade;
 
 import cz.fi.muni.pa165.referenceManager.dto.ReferenceDTO;
 import cz.fi.muni.pa165.referenceManager.dto.TagDTO;
 import cz.fi.muni.pa165.referenceManager.dto.UserDTO;
 import cz.fi.muni.pa165.referenceManager.dto.UserLoginDTO;
+import cz.fi.muni.pa165.referenceManager.facade.UserFacade;
 import cz.fi.muni.pa165.referenceManager.service.MappingService;
 import cz.fi.muni.pa165.referenceManager.service.UserService;
 import cz.muni.fi.pa165.referenceManager.entity.Reference;
@@ -12,7 +13,6 @@ import cz.muni.fi.pa165.referenceManager.entity.User;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
-import javax.jws.soap.SOAPBinding;
 import javax.transaction.Transactional;
 import java.util.Collection;
 

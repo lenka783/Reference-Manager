@@ -1,7 +1,8 @@
-package cz.fi.muni.pa165.referenceManager.facade;
+package cz.fi.muni.pa165.referenceManager.service.facade;
 
 import cz.fi.muni.pa165.referenceManager.dto.NoteDTO;
 import cz.fi.muni.pa165.referenceManager.dto.ReferenceDTO;
+import cz.fi.muni.pa165.referenceManager.facade.ReferenceFacade;
 import cz.fi.muni.pa165.referenceManager.service.MappingService;
 import cz.fi.muni.pa165.referenceManager.service.ReferenceService;
 import cz.muni.fi.pa165.referenceManager.entity.Note;
