@@ -15,6 +15,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.transaction.Transactional;
+import javax.validation.ConstraintViolationException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -85,7 +86,7 @@ public class TagDaoTest {
             t, em.find(Tag.class, t.getId()));
     }
 
-    @Test(expected = PersistenceException.class)
+    @Test(expected = ConstraintViolationException.class)
     public void testFailCreateTagWithNullName() {
         Tag tag = new Tag();
         tagDao.create(tag);

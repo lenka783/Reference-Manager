@@ -29,7 +29,7 @@ public class ReferenceDaoTest {
     @PersistenceContext
     private EntityManager em;
 
-    @Test(expected = PersistenceException.class)
+    @Test(expected = NullPointerException.class)
     public void testNewReferenceWithoutTitleError() {
         Reference reference = new Reference();
         referenceDao.create(reference);
