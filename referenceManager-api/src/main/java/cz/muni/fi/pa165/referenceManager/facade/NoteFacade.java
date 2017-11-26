@@ -8,13 +8,13 @@ import java.util.List;
  * @author Lenka Smitalova
  */
 public interface NoteFacade {
-    void createNote(NoteDTO note);
+    Long createNote(NoteDTO note);
 
     void changeNoteText(NoteDTO noteDTO, String newText);
 
-    void removeNote(NoteDTO noteDTO);
+    void removeNote(Long noteId);
 
-    NoteDTO getNoteById(Long id);
+    NoteDTO findById(NoteDTO noteDTO);
 
-    List<NoteDTO> getAllNotes();
+    List<NoteDTO> findAllNotes();
 }

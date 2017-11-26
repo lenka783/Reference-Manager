@@ -2,9 +2,9 @@ package cz.muni.fi.pa165.referenceManager.service;
 
 import cz.muni.fi.pa165.referenceManager.dao.NoteDao;
 import cz.muni.fi.pa165.referenceManager.entity.Note;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.inject.Inject;
 import java.util.Collection;
 
 /**
@@ -12,7 +12,7 @@ import java.util.Collection;
  */
 @Service
 public class NoteServiceImpl implements NoteService{
-    @Autowired
+    @Inject
     private NoteDao noteDao;
 
     @Override
@@ -21,7 +21,8 @@ public class NoteServiceImpl implements NoteService{
     }
 
     @Override
-    public void changeNoteText(Note note, String newText) {
+    public void changeNoteText(Long noteId, String newText) {
+        Note note = noteDao.findById(noteId);
         note.setText(newText);
         noteDao.update(note);
     }
@@ -32,12 +33,12 @@ public class NoteServiceImpl implements NoteService{
     }
 
     @Override
-    public Note getNoteById(Long id) {
+    public Note findById(Long id) {
         return noteDao.findById(id);
     }
 
     @Override
-    public Collection<Note> getAllNotes() {
+    public Collection<Note> findAllNotes() {
         return noteDao.findAll();
     }
 }

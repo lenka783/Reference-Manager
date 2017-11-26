@@ -29,6 +29,13 @@ public class Tag {
     )
     private Set<Reference> references = new HashSet<>();
 
+    public Tag() {
+    }
+
+    public Tag(Long id) {
+        this.id = id;
+    }
+
     public Long getId() {
         return id;
     }

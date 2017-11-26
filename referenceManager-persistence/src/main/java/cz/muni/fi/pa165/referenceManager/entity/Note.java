@@ -23,6 +23,13 @@ public class Note {
     @NotNull
     private String text;
 
+    public Note() {
+    }
+
+    public Note(Long id) {
+        this.id = id;
+    }
+
     public Long getId() {
         return id;
     }

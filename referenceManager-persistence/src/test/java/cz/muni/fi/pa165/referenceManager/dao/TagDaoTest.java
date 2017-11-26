@@ -138,7 +138,7 @@ public class TagDaoTest {
 
     @Test
     public void testFindTagByNonExistingId() {
-        Assert.assertNull("FindById with null id should return null",
+        Assert.assertNull("FindById by non-existing id should return null",
             tagDao.findById(9031l));
     }
 
