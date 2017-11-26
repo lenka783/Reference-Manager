@@ -80,6 +80,22 @@ public class Reference {
         this.pagesEnd = pagesEnd;
     }
 
+    public Reference (Long id){
+        this.id = id;
+    }
+
+    public Reference() {
+    }
+
+    public void addNote(Note note){
+        notes.add(note);
+    }
+
+    public void removeNote(Note note){
+        notes.remove(note);
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
