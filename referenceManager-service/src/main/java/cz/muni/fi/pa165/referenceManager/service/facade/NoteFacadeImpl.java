@@ -1,6 +1,5 @@
 package cz.muni.fi.pa165.referenceManager.service.facade;
 
-import cz.muni.fi.pa165.referenceManager.dao.NoteDao;
 import cz.muni.fi.pa165.referenceManager.dto.NoteDTO;
 import cz.muni.fi.pa165.referenceManager.entity.Note;
 import cz.muni.fi.pa165.referenceManager.facade.NoteFacade;
@@ -19,8 +18,6 @@ import java.util.List;
 @Service
 @Transactional
 public class NoteFacadeImpl implements NoteFacade {
-    @Inject
-    private NoteDao noteDao;
 
     @Inject
     private NoteService noteService;
@@ -29,29 +26,30 @@ public class NoteFacadeImpl implements NoteFacade {
     private MappingService mappingService;
 
     @Override
-    public void createNote(NoteDTO noteDTO) {
+    public Long createNote(NoteDTO noteDTO) {
         Note note = mappingService.mapTo(noteDTO, Note.class);
-        noteDao.create(note);
-        noteDTO.setId(note.getId());
+        noteService.create(note);
+        return note.getId();
     }
 
     @Override
     public void changeNoteText(NoteDTO noteDTO, String newText) {
-        noteService.changeNoteText(noteDao.findById(noteDTO.getId()), newText);
+        noteService.changeNoteText(noteDTO.getId(), newText);
     }
 
     @Override
-    public void removeNote(NoteDTO noteDTO) {
-        noteService.remove(noteDao.findById(noteDTO.getId()));
+    public void removeNote(Long noteId) {
+        noteService.remove(new Note(noteId));
     }
 
     @Override
-    public NoteDTO getNoteById(Long noteId) {
-        return mappingService.mapTo(noteDao.findById(noteId), NoteDTO.class);
+    public NoteDTO findById(NoteDTO noteDTO) {
+        Note note = noteService.findById(noteDTO.getId());
+        return (note == null) ? null : mappingService.mapTo(note, NoteDTO.class);
     }
 
     @Override
-    public List<NoteDTO> getAllNotes() {
-        return mappingService.mapTo(noteDao.findAll(), NoteDTO.class);
+    public List<NoteDTO> findAllNotes() {
+        return mappingService.mapTo(noteService.findAllNotes(), NoteDTO.class);
     }
 }

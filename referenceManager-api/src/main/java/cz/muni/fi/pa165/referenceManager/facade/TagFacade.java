@@ -9,15 +9,15 @@ import java.util.List;
  */
 public interface TagFacade {
 
-    void createTag(TagDTO tag);
+    Long createTag(TagDTO tag);
 
-    void updateTagName(Long tagId, String newName);
+    void updateTagName(TagDTO tagDTO, String newName);
 
-    void removeTag(TagDTO tag);
+    void removeTag(Long tagId);
 
-    TagDTO getTagById(Long id);
+    TagDTO findById(TagDTO tagDTO);
 
-    List<TagDTO> getAllTags();
+    List<TagDTO> findAllTags();
 
     void addReference(Long tagId, Long referenceId);
 

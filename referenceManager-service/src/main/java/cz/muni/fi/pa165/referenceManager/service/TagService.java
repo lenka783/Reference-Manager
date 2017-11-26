@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.referenceManager.service;
 
+import cz.muni.fi.pa165.referenceManager.entity.Reference;
 import cz.muni.fi.pa165.referenceManager.entity.Tag;
 import org.springframework.stereotype.Service;
 
@@ -11,13 +12,17 @@ import java.util.Collection;
 @Service
 public interface TagService {
 
-    void create(Tag tag);
+    Tag create(Tag tag);
 
-    void update(Tag tag);
+    void updateTagName(Long tagId, String newName);
 
     void remove(Tag tag);
 
-    Tag getTagById(Long id);
+    Tag findById(Long tagId);
 
-    Collection<Tag> getAllTags();
+    Collection<Tag> findAllTags();
+
+    void addReference(Tag tag, Reference reference);
+
+    void removeReference(Tag tag, Reference reference);
 }

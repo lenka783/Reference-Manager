@@ -13,11 +13,11 @@ public interface NoteService {
 
     void create(Note note);
 
-    void changeNoteText(Note note, String newText);
+    void changeNoteText(Long noteId, String newText);
 
     void remove(Note note);
 
-    Note getNoteById(Long id);
+    Note findById(Long noteId);
 
-    Collection<Note> getAllNotes();
+    Collection<Note> findAllNotes();
 }
