@@ -13,6 +13,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.transaction.Transactional;
 import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import java.util.HashSet;
@@ -44,20 +45,20 @@ public class UserDaoTest {
         return user;
     }
 
-    @Test(expected = PersistenceException.class)
+    @Test(expected = NullPointerException.class)
     public void testEmptyUserError() {
         User user = new User();
         userDao.create(user);
     }
 
-    @Test(expected = PersistenceException.class)
+    @Test(expected = NullPointerException.class)
     public void testEmptyEmailError() {
         User user = new User();
         user.setPasswordHash("password");
         userDao.create(user);
     }
 
-    @Test(expected = PersistenceException.class)
+    @Test(expected = ConstraintViolationException.class)
     public void testEmptyPasswordError() {
         User user = new User();
         user.setEmail("user@example.com");
@@ -74,7 +75,7 @@ public class UserDaoTest {
         user.setPasswordHash("password");
         Set<ConstraintViolation<User>> violations = validator.validate(user);
         assertEquals("There should be one constraint violation for the email " +
-            "field", 1, violations.size());
+            "field", 2, violations.size());
     }
 
     @Test
@@ -110,7 +111,7 @@ public class UserDaoTest {
         assertTrue("Original and found user should be equal", user.equals(found));
     }
 
-    @Test(expected = PersistenceException.class)
+    @Test(expected = ConstraintViolationException.class)
     public void testUpdateEmailToExisting() {
         User user1 = testUser();
         userDao.create(user1);
