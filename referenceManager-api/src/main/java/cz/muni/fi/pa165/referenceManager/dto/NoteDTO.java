@@ -4,8 +4,8 @@ package cz.muni.fi.pa165.referenceManager.dto;
  * @author Lenka Smitalova
  */
 public class NoteDTO {
-
     private Long id;
+
     private String text;
 
     public Long getId() {

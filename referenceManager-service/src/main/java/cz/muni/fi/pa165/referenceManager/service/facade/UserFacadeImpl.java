@@ -41,28 +41,28 @@ public class UserFacadeImpl implements UserFacade {
     @Override
     public void registerUser(UserDTO userDTO, String plainPassword) {
         User user = mappingService.mapTo(userDTO, User.class);
-        userService.registerUser(user, plainPassword);
+        userService.registerUser(user.getId(), plainPassword);
         userDTO.setId(user.getId());
     }
 
     @Override
     public boolean authenticate(UserLoginDTO userDTO) {
         User user = userService.findUserByEmail(userDTO.getEmail());
-        return userService.authenticate(user, userDTO.getPassword());
+        return userService.authenticate(user.getId(), userDTO.getPassword());
     }
 
     @Override
     public void addReference(Long userId, ReferenceDTO referenceDTO) {
         User user = userService.findUserById(userId);
         Reference reference = mappingService.mapTo(referenceDTO, Reference.class);
-        userService.addReference(user, reference);
+        userService.addReference(user.getId(), reference.getId());
     }
 
     @Override
     public void removeReference(Long userId, ReferenceDTO referenceDTO) {
         User user = userService.findUserById(userId);
         Reference reference = mappingService.mapTo(referenceDTO, Reference.class);
-        userService.removeReference(user, reference);
+        userService.removeReference(user.getId(), reference.getId());
     }
 
     @Override

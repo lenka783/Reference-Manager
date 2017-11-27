@@ -11,7 +11,7 @@ import java.util.Set;
  * @author David Šarman
  */
 @Entity
-@Table(name = "Tags")
+@Table(name = "Tags_table")
 public class Tag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,8 +37,7 @@ public class Tag {
     )
     private Set<User> users = new HashSet<>();
 
-    public Tag() {
-    }
+    public Tag() {}
 
     public Tag(Long id) {
         this.id = id;

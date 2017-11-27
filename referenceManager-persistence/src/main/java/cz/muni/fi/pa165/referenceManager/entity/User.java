@@ -13,11 +13,11 @@ import java.util.Set;
  **/
 
 @Entity
-@Table(name = "Users")
+@Table(name = "Users_table")
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "USER_ID")
     private Long id;
 
     @Column(unique = true)
@@ -90,7 +90,31 @@ public class User {
         tags.remove(tag);
     }
 
+    public void addSharedTag(Tag tag) {
+        sharedTags.add(tag);
+    }
 
+    public void removeSharedTag(Tag tag) {
+        sharedTags.remove(tag);
+    }
+
+    /*
+    public Set<Tag> getSharedTags() {
+        return sharedTags;
+    }
+
+    public void setSharedTags(Set<Tag> sharedTags) {
+        this.sharedTags = sharedTags;
+    }
+
+    public Set<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
+    }
+    */
 
     @Override
     public boolean equals(Object object) {
@@ -113,21 +137,6 @@ public class User {
         return resultHash;
     }
 
-    public Set<Tag> getSharedTags() {
-        return sharedTags;
-    }
-
-    public void setSharedTags(Set<Tag> sharedTags) {
-        this.sharedTags = sharedTags;
-    }
-
-    public Set<Tag> getTags() {
-        return tags;
-    }
-
-    public void setTags(Set<Tag> tags) {
-        this.tags = tags;
-    }
 
 
 }
