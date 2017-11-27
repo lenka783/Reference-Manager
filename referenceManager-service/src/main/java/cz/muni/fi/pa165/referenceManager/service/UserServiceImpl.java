@@ -4,7 +4,7 @@ import cz.muni.fi.pa165.referenceManager.dao.UserDao;
 import cz.muni.fi.pa165.referenceManager.entity.Reference;
 import cz.muni.fi.pa165.referenceManager.entity.Tag;
 import cz.muni.fi.pa165.referenceManager.entity.User;
-import org.jasypt.util.password.ConfigurablePasswordEncryptor;
+import org.jasypt.util.password.PasswordEncryptor;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Inject
-    private ConfigurablePasswordEncryptor passwordEncryptor;
+    private PasswordEncryptor passwordEncryptor;
 
 
     public User findUserById(Long id) {
