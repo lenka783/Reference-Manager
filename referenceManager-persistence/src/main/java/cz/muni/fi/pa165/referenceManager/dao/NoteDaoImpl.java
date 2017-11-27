@@ -28,7 +28,7 @@ public class NoteDaoImpl implements NoteDao {
 
     @Override
     public void remove(Note note) {
-        Note managed = em.find(Note.class,note.getId());
+        Note managed = em.find(Note.class, note.getId());
         em.remove(managed);
     }
 

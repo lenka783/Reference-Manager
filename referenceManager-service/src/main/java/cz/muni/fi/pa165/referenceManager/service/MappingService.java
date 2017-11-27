@@ -6,6 +6,8 @@ import java.util.Collection;
 import java.util.List;
 
 /**
+ * Dozer mapping class
+ *
  * @author Jan Bílek
  */
 

@@ -28,6 +28,11 @@ public class ReferenceDaoTest {
     @PersistenceContext
     private EntityManager em;
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testCreateNullReference() {
+        referenceDao.create(null);
+    }
+
     @Test(expected = NullPointerException.class)
     public void testNewReferenceWithoutTitleError() {
         Reference reference = new Reference();

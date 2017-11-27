@@ -8,6 +8,8 @@ import cz.muni.fi.pa165.referenceManager.exceptions.ImportException;
 import java.io.File;
 
 /**
+ * Interface for importing/exporting reference from/to a BibTex format
+ * to entity Reference.
  * @author David Šarman
  */
 public interface ImportExportService {
