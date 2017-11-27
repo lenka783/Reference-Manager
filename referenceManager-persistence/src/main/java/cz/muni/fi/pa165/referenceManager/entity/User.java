@@ -98,7 +98,14 @@ public class User {
         sharedTags.remove(tag);
     }
 
-    /*
+    public Set<Reference> getReferences() {
+        return references;
+    }
+
+    public void setReferences(Set<Reference> references) {
+        this.references = references;
+    }
+
     public Set<Tag> getSharedTags() {
         return sharedTags;
     }
@@ -114,7 +121,6 @@ public class User {
     public void setTags(Set<Tag> tags) {
         this.tags = tags;
     }
-    */
 
     @Override
     public boolean equals(Object object) {
