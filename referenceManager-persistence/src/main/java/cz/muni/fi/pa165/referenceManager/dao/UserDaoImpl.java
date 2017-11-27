@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.referenceManager.dao;
 
+import cz.muni.fi.pa165.referenceManager.entity.Tag;
 import cz.muni.fi.pa165.referenceManager.entity.User;
 import org.springframework.stereotype.Repository;
 
@@ -56,4 +57,5 @@ public class UserDaoImpl implements UserDao{
     public List<User> findAll() {
         return em.createQuery("select u from User u", User.class).getResultList();
     }
+
 }

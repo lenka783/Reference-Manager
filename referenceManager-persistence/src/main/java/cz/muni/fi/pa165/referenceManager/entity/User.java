@@ -13,11 +13,11 @@ import java.util.Set;
  **/
 
 @Entity
-@Table(name = "Users")
+@Table(name = "Users_table")
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "USER_ID")
     private Long id;
 
     @Column(unique = true)
@@ -34,8 +34,17 @@ public class User {
     @OneToMany
     private Set<Tag> tags = new HashSet<>();
 
-    @OneToMany
+    @ManyToMany
+    private Set<Tag> sharedTags = new HashSet<>();
+
+    @ManyToMany
     private Set<Reference> references = new HashSet<>();
+
+    public User() {}
+
+    public User(Long id) {
+        this.id = id;
+    }
 
     public Long getId() {
         return id;
@@ -81,6 +90,32 @@ public class User {
         tags.remove(tag);
     }
 
+    public void addSharedTag(Tag tag) {
+        sharedTags.add(tag);
+    }
+
+    public void removeSharedTag(Tag tag) {
+        sharedTags.remove(tag);
+    }
+
+    /*
+    public Set<Tag> getSharedTags() {
+        return sharedTags;
+    }
+
+    public void setSharedTags(Set<Tag> sharedTags) {
+        this.sharedTags = sharedTags;
+    }
+
+    public Set<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
+    }
+    */
+
     @Override
     public boolean equals(Object object) {
         if (object == this) {
@@ -101,5 +136,7 @@ public class User {
         resultHash = primeNumber * resultHash + (name == null ? 0 : name.hashCode());
         return resultHash;
     }
+
+
 
 }

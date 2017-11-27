@@ -81,6 +81,7 @@ public class NoteDaoTest {
     @Test
     public void testFindNoteById(){
         Note note = new Note();
+        note.setText("Note text.");
         em.persist(note);
         Note foundNote = noteDao.findById(note.getId());
         Assert.assertTrue(note.equals(foundNote));

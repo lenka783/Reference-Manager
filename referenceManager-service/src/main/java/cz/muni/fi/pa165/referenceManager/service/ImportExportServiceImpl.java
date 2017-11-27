@@ -126,7 +126,6 @@ public class ImportExportServiceImpl implements ImportExportService {
         return reference;
     }
 
-    @Transactional
     @Override
     public void importReferences(User user, File file, Tag tag) throws ImportException {
         if (user == null || file == null || tag == null) {
@@ -139,7 +138,7 @@ public class ImportExportServiceImpl implements ImportExportService {
         for (BibTeXEntry entry : entryMap.values()) {
             Reference reference = parseBibTeXEntry(entry);
             referenceService.createReference(reference);
-            userService.addReference(user, reference);
+            userService.addReference(user.getId(), reference.getId());
             tagService.addReference(tag, reference);
         }
     }

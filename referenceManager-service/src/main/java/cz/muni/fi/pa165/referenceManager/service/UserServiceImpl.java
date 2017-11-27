@@ -1,5 +1,7 @@
 package cz.muni.fi.pa165.referenceManager.service;
 
+import cz.muni.fi.pa165.referenceManager.dao.ReferenceDao;
+import cz.muni.fi.pa165.referenceManager.dao.TagDao;
 import cz.muni.fi.pa165.referenceManager.dao.UserDao;
 import cz.muni.fi.pa165.referenceManager.entity.Reference;
 import cz.muni.fi.pa165.referenceManager.entity.Tag;
@@ -11,7 +13,7 @@ import javax.inject.Inject;
 import java.util.Collection;
 
 /**
- * @author Jan Bílek
+ * @author Jan Bílek, Andrej Staruch
  */
 
 @Service
@@ -21,48 +23,93 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Inject
+    private TagDao tagDao;
+
+    @Inject
+    private ReferenceDao referenceDao;
+
+    @Inject
     private PasswordEncryptor passwordEncryptor;
 
+    @Override
+    public void create(User user) {
+        userDao.create(user);
+    }
 
+    @Override
     public User findUserById(Long id) {
         return userDao.findById(id);
     }
 
+    @Override
     public User findUserByEmail(String email) {
         return userDao.findUserByEmail(email);
     }
 
-    public void registerUser(User user, String plainPassword) {
+    @Override
+    public void registerUser(Long userId, String plainPassword) {
+        User user = new User(userId);
         user.setPasswordHash(createPasswordHash(plainPassword));
         userDao.create(user);
     }
 
+    @Override
     public Collection<User> getAllUsers() {
         return userDao.findAll();
     }
 
-    public boolean authenticate(User user, String password) {
+    @Override
+    public boolean authenticate(Long userId, String password) {
+        User user = userDao.findById(userId);
         return verifyPassword(user.getPasswordHash(), password);
     }
 
     @Override
-    public void addReference(User user, Reference reference) {
+    public void addReference(Long userId, Long referenceId) {
+        User user = userDao.findById(userId);
+        Reference reference = referenceDao.findById(referenceId);
         user.addReference(reference);
+        userDao.update(user);
     }
 
     @Override
-    public void removeReference(User user, Reference reference) {
+    public void removeReference(Long userId, Long referenceId) {
+        User user = userDao.findById(userId);
+        Reference reference = referenceDao.findById(referenceId);
         user.removeReference(reference);
+        userDao.update(user);
     }
 
     @Override
-    public void addTag(User user, Tag tag) {
+    public void addTag(Long userId, Long tagId) {
+        User user = userDao.findById(userId);
+        Tag tag = tagDao.findById(tagId);
         user.addTag(tag);
+        userDao.update(user);
     }
 
     @Override
-    public void removeTag(User user, Tag tag) {
+    public void removeTag(Long userId, Long tagId) {
+        User user = userDao.findById(userId);
+        Tag tag = tagDao.findById(tagId);
         user.removeTag(tag);
+        userDao.update(user);
+    }
+
+    @Override
+    public void shareTag(Long userId, Long tagId) {
+        User user = userDao.findById(userId);
+        Tag tag = tagDao.findById(tagId);
+        tag.addUser(user);
+        tagDao.update(tag);
+    }
+
+    @Override
+    public void unshareTag(Long userId, Long tagId) {
+        User user = userDao.findById(userId);
+        Tag tag = tagDao.findById(tagId);
+        tag.removeUser(user);
+        tagDao.update(tag);
     }
 
     private boolean verifyPassword(String password, String correctPasswordHash) {
@@ -73,8 +120,6 @@ public class UserServiceImpl implements UserService {
             throw new IllegalArgumentException("Password hash cannot be null.");
         }
         return passwordEncryptor.checkPassword(correctPasswordHash, password);
-
-
     }
 
     private String createPasswordHash(String password) {

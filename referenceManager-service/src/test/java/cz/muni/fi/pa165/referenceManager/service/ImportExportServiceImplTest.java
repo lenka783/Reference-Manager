@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.internal.matchers.Any;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.io.File;
@@ -115,9 +116,9 @@ public class ImportExportServiceImplTest {
 
         for (Reference expectedReference : getTestData()) {
             verify(referenceService, times(1)).createReference(expectedReference);
-            verify(userService, times(1)).addReference(user, expectedReference);
             verify(tagService, times(1)).addReference(tag, expectedReference);
         }
+        verify(userService, times(3)).addReference(null, null);
     }
 
     @Test
