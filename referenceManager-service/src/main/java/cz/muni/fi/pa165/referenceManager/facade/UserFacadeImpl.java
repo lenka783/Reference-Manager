@@ -1,4 +1,4 @@
-package cz.muni.fi.pa165.referenceManager.service.facade;
+package cz.muni.fi.pa165.referenceManager.facade;
 
 import cz.muni.fi.pa165.referenceManager.dto.ReferenceDTO;
 import cz.muni.fi.pa165.referenceManager.dto.TagDTO;
