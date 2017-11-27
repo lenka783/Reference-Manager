@@ -15,6 +15,7 @@ public class Note {
     private Long id;
 
     @NotNull
+    @Column(nullable = false)
     private String text;
 
     public Note() {}
