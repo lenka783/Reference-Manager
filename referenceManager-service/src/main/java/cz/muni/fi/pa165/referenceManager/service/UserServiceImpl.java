@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.referenceManager.service;
 
+import cz.muni.fi.pa165.referenceManager.dao.TagDao;
 import cz.muni.fi.pa165.referenceManager.dao.UserDao;
 import cz.muni.fi.pa165.referenceManager.entity.Reference;
 import cz.muni.fi.pa165.referenceManager.entity.Tag;
@@ -21,8 +22,15 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Inject
+    private TagDao tagDao;
+
+    @Inject
     private ConfigurablePasswordEncryptor passwordEncryptor;
 
+    @Override
+    public void create(User user) {
+        userDao.create(user);
+    }
 
     public User findUserById(Long id) {
         return userDao.findById(id);
@@ -56,14 +64,36 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addTag(User user, Tag tag) {
+    public void addTag(Long userId, Long tagId) {
+        User user = userDao.findById(userId);
+        Tag tag = tagDao.findById(tagId);
         user.addTag(tag);
+        userDao.update(user);    }
+
+    @Override
+    public void removeTag(Long userId, Long tagId) {
+        User user = userDao.findById(userId);
+        Tag tag = tagDao.findById(tagId);
+        user.removeTag(tag);
+        userDao.update(user);
     }
 
     @Override
-    public void removeTag(User user, Tag tag) {
-        user.removeTag(tag);
+    public void shareTag(Long userId, Long tagId) {
+        User user = userDao.findById(userId);
+        Tag tag = tagDao.findById(tagId);
+        tag.addUser(user);
+        tagDao.update(tag);
     }
+
+    @Override
+    public void unshareTag(Long userId, Long tagId) {
+        User user = userDao.findById(userId);
+        Tag tag = tagDao.findById(tagId);
+        tag.removeUser(user);
+        tagDao.update(tag);
+    }
+
 
     private boolean verifyPassword(String password, String correctPasswordHash) {
         if (password == null) {

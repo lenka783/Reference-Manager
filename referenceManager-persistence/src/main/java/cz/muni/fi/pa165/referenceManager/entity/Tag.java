@@ -29,6 +29,14 @@ public class Tag {
     )
     private Set<Reference> references = new HashSet<>();
 
+    @ManyToMany()
+    @JoinTable(
+        name = "User_Tag",
+        joinColumns = { @JoinColumn(name = "TAG_ID") },
+        inverseJoinColumns = { @JoinColumn(name = "USER_ID") }
+    )
+    private Set<User> users = new HashSet<>();
+
     public Tag() {
     }
 
@@ -54,6 +62,14 @@ public class Tag {
 
     public void setReferences(Set<Reference> references) {
         this.references = references;
+    }
+
+    public void addUser(User user) {
+        users.add(user);
+    }
+
+    public void removeUser(User user) {
+        users.remove(user);
     }
 
     @Override

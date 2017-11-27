@@ -13,6 +13,8 @@ import java.util.Collection;
 
 public interface UserService {
 
+    void create(User user);
+
     User findUserById(Long id);
 
     User findUserByEmail(String email);
@@ -27,7 +29,12 @@ public interface UserService {
 
     void removeReference(User user, Reference reference);
 
-    void addTag(User user, Tag tag);
+    void addTag(Long userId, Long tagId);
 
-    void removeTag(User user, Tag tag);
+    void removeTag(Long userId, Long tagId);
+
+    void shareTag(Long userId, Long tagId);
+
+    void unshareTag(Long userId, Long tagId);
+
 }

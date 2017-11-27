@@ -66,17 +66,23 @@ public class UserFacadeImpl implements UserFacade {
     }
 
     @Override
-    public void addTag(Long userId, TagDTO tagDTO) {
-        User user = userService.findUserById(userId);
-        Tag tag = mappingService.mapTo(tagDTO, Tag.class);
-        userService.addTag(user, tag);
+    public void addTag(Long userId, Long tagId) {
+        userService.addTag(userId, tagId);
     }
 
     @Override
-    public void removeTag(Long userId, TagDTO tagDTO) {
-        User user = userService.findUserById(userId);
-        Tag tag = mappingService.mapTo(tagDTO, Tag.class);
-        userService.removeTag(user, tag);
+    public void removeTag(Long userId, Long tagId) {
+        userService.removeTag(userId, tagId);
+    }
+
+    @Override
+    public void shareTag(Long userId, Long tagId) {
+        userService.shareTag(userId, tagId);
+    }
+
+    @Override
+    public void unshareTag(Long userId, Long tagId) {
+        userService.unshareTag(userId, tagId);
     }
 
     @Override
