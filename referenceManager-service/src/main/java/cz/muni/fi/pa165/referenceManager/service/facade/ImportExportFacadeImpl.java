@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import java.io.File;
 
 /**
@@ -35,6 +36,7 @@ public class ImportExportFacadeImpl implements ImportExportFacade {
     private TagFacade tagFacade;
 
     @Override
+    @Transactional
     public void importReferences(Long userId, File file, TagDTO tagDTO) throws ImportException {
         if (userId == null || file == null || tagDTO == null || tagDTO.getId() == null) {
             throw new IllegalArgumentException("None of the arguments can be null");
