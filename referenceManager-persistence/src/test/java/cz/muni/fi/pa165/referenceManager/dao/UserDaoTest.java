@@ -1,6 +1,6 @@
 package cz.muni.fi.pa165.referenceManager.dao;
 
-import cz.muni.fi.pa165.referenceManager.PersistenceApplicationContext;
+import cz.muni.fi.pa165.referenceManager.config.PersistenceApplicationContext;
 import cz.muni.fi.pa165.referenceManager.entity.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;

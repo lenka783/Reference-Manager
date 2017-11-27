@@ -14,6 +14,8 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 /**
+ * Implementation of the TagFacade interface.
+ *
  * @author Lenka Smitalova
  */
 @Service
@@ -32,8 +34,8 @@ public class TagFacadeImpl implements TagFacade {
     @Override
     public Long createTag(TagDTO tagDTO) {
         Tag tag = mappingService.mapTo(tagDTO, Tag.class);
-        Tag newTag = tagService.create(tag);
-        return newTag.getId();
+        tagService.create(tag);
+        return tag.getId();
     }
 
     @Override
@@ -43,7 +45,7 @@ public class TagFacadeImpl implements TagFacade {
 
     @Override
     public void removeTag(Long tagId) {
-        tagService.remove(new Tag(tagId));
+        tagService.remove(tagId);
     }
 
     @Override

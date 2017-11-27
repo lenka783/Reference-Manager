@@ -14,7 +14,7 @@ import org.dozer.Mapper;
  */
 
 @Service
-public class MappingServiceImpl {
+public class MappingServiceImpl implements MappingService {
 
     @Inject
     Mapper dozerMapper;

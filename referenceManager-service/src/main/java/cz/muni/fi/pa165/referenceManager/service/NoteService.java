@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 
 /**
+ * Interface representing NoteService.
+ *
  * @author Lenka Smitalova
  */
 @Service
@@ -15,7 +17,7 @@ public interface NoteService {
 
     void changeNoteText(Long noteId, String newText);
 
-    void remove(Note note);
+    void remove(Long noteId);
 
     Note findById(Long noteId);
 

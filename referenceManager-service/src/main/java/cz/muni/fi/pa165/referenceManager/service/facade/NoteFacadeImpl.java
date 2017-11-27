@@ -13,6 +13,8 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 /**
+ * Implementation of the NoteFacade interface.
+ *
  * @author Lenka Smitalova
  */
 @Service
@@ -39,7 +41,7 @@ public class NoteFacadeImpl implements NoteFacade {
 
     @Override
     public void removeNote(Long noteId) {
-        noteService.remove(new Note(noteId));
+        noteService.remove(noteId);
     }
 
     @Override
