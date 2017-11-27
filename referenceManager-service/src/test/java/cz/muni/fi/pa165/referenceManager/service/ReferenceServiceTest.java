@@ -10,8 +10,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.springframework.dao.DataAccessException;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -79,6 +79,7 @@ public class ReferenceServiceTest {
     public void testGetAllReferences(){
         Collection<Reference> allReferences = referenceService.getAllReferences();
         Assert.assertEquals(allReferences,references);
+        Mockito.verify(referenceDao, Mockito.times(1)).findAll();
     }
 
     @Test
@@ -92,6 +93,5 @@ public class ReferenceServiceTest {
         referenceService.removeNote(referenceMock, note);
         Mockito.verify(referenceMock, Mockito.times(1)).removeNote(note);
     }
-
 
 }
