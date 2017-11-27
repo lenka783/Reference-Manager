@@ -29,7 +29,8 @@ public class ReferenceServiceImpl implements ReferenceService {
 
     @Override
     public void deleteReference(Long id) {
-        referenceDao.remove(new Reference(id));
+        Reference reference = referenceDao.findById(id);
+        referenceDao.remove(reference);
     }
 
     @Override

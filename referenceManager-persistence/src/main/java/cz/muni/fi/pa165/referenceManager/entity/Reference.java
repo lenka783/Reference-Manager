@@ -94,6 +94,10 @@ public class Reference {
         notes.remove(note);
     }
 
+    public Set<Note> getNotes() {
+        return notes;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
