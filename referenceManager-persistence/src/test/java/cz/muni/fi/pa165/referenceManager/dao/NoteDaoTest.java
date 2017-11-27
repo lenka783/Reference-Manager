@@ -25,6 +25,11 @@ public class NoteDaoTest {
     @PersistenceContext
     private EntityManager em;
 
+    @Test(expected=IllegalArgumentException.class)
+    public void testCreateNullNote() {
+        noteDao.create(null);
+    }
+
     @Test
     public void testCreateNoteSuccess() {
         Note note = new Note();
