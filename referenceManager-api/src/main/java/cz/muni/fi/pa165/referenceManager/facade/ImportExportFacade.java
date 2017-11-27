@@ -6,6 +6,9 @@ import cz.muni.fi.pa165.referenceManager.dto.TagDTO;
 import java.io.File;
 import java.util.List;
 
+/**
+ * @author David Šarman
+ */
 public interface ImportExportFacade {
     List<ReferenceDTO> importReferences(Long userId, File file, TagDTO tagDTO);
     File exportReferences(Long tagId);

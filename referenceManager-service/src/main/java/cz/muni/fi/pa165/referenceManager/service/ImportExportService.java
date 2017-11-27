@@ -7,6 +7,9 @@ import cz.muni.fi.pa165.referenceManager.exceptions.ImportException;
 
 import java.io.File;
 
+/**
+ * @author David Šarman
+ */
 public interface ImportExportService {
     String EXPORT_FILENAME_START = "reference_export_tag_";
     /**
@@ -26,5 +29,14 @@ public interface ImportExportService {
      * @return File with the exported references in bibtex format
      * @throws ExportException In case of unsuccessful export
      */
-    File exportReferences(Tag tag) throws ExportException;
+    File exportReferencesToBibtex(Tag tag) throws ExportException;
+
+    /**
+     * Export references with given tag to a CSV formatted file
+     *
+     * @param tag Tag whose references will be exported
+     * @return File with the exported references in CSV format
+     * @throws ExportException In case of unsuccessful export
+     */
+    File exportReferencesToCsv(Tag tag) throws ExportException;
 }
