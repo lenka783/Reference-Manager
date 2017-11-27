@@ -10,7 +10,9 @@ import java.util.Set;
 public class TagDTO {
 
     private Long id;
+
     private String name;
+
     private Set<ReferenceDTO> references = new HashSet<>();
 
     public Long getId() {
@@ -36,6 +38,8 @@ public class TagDTO {
     public void setReferences(Set<ReferenceDTO> references) {
         this.references = references;
     }
+
+
 
     @Override
     public boolean equals(Object o) {

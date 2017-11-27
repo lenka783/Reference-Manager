@@ -36,6 +36,12 @@ public class Reference {
     @OneToMany
     private Set<Note> notes = new HashSet<Note>();
 
+    public Reference() {}
+
+    public Reference (Long id){
+        this.id = id;
+    }
+
     public Long getId() {
         return id;
     }
@@ -80,13 +86,6 @@ public class Reference {
         this.pagesEnd = pagesEnd;
     }
 
-    public Reference (Long id){
-        this.id = id;
-    }
-
-    public Reference() {
-    }
-
     public void addNote(Note note){
         notes.add(note);
     }
@@ -94,7 +93,6 @@ public class Reference {
     public void removeNote(Note note){
         notes.remove(note);
     }
-
 
     @Override
     public boolean equals(Object o) {

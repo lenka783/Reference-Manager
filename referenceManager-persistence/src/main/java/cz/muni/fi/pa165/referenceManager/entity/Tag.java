@@ -11,7 +11,7 @@ import java.util.Set;
  * @author David Šarman
  */
 @Entity
-@Table(name = "Tags")
+@Table(name = "Tags_table")
 public class Tag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,8 +29,15 @@ public class Tag {
     )
     private Set<Reference> references = new HashSet<>();
 
-    public Tag() {
-    }
+    @ManyToMany()
+    @JoinTable(
+        name = "User_Tag",
+        joinColumns = { @JoinColumn(name = "TAG_ID") },
+        inverseJoinColumns = { @JoinColumn(name = "USER_ID") }
+    )
+    private Set<User> users = new HashSet<>();
+
+    public Tag() {}
 
     public Tag(Long id) {
         this.id = id;
@@ -58,6 +65,14 @@ public class Tag {
 
     public void setReferences(Set<Reference> references) {
         this.references = references;
+    }
+
+    public void addUser(User user) {
+        users.add(user);
+    }
+
+    public void removeUser(User user) {
+        users.remove(user);
     }
 
     @Override

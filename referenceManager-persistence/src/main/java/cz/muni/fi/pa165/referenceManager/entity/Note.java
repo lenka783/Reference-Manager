@@ -4,25 +4,20 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
- * Class representing a Note cz.muni.fi.pa165.referenceManager.entity
- * This class is used for adding an extra note to references.
  * @author Andrej Staruch
  */
 
 @Entity
-@Table(name = "Notes")
+@Table(name = "Notes_table")
 public class Note {
-
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
-    @Column(nullable = false)
     private String text;
 
-    public Note() {
-    }
+    public Note() {}
 
     public Note(Long id) {
         this.id = id;

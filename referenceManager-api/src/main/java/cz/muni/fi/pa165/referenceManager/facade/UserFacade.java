@@ -26,7 +26,11 @@ public interface UserFacade {
 
     void removeReference(Long userId, ReferenceDTO reference);
 
-    void addTag(Long userId, TagDTO tag);
+    void addTag(Long userId, Long tagId);
 
-    void removeTag(Long userId, TagDTO tag);
+    void removeTag(Long userId, Long tagId);
+
+    void shareTag(Long userId, Long tagId);
+
+    void unshareTag(Long userId, Long tagId);
 }
