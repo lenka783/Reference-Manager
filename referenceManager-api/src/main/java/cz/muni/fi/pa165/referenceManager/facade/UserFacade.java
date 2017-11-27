@@ -8,23 +8,23 @@ import cz.muni.fi.pa165.referenceManager.dto.UserLoginDTO;
 import java.util.Collection;
 
 /**
- * @author Jan Bílek
+ * @author Jan Bílek, Andrej Staruch
  */
 public interface UserFacade {
+
+    void registerUser(UserDTO user, String plainPassword);
 
     UserDTO findUserById(Long id);
 
     UserDTO findUserByEmail(String email);
 
-    void registerUser(UserDTO user, String plainPassword);
-
     Collection<UserDTO> getAllUsers();
 
-    boolean authenticate(UserLoginDTO user);
+    boolean authenticate(UserLoginDTO userLoginDTO);
 
-    void addReference(Long userId, ReferenceDTO reference);
+    void addReference(Long userId, Long referenceId);
 
-    void removeReference(Long userId, ReferenceDTO reference);
+    void removeReference(Long userId, Long referenceId);
 
     void addTag(Long userId, Long tagId);
 
