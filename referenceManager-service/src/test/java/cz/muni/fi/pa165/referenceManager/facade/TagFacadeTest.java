@@ -44,7 +44,7 @@ public class TagFacadeTest {
     @Before
     public void beforeTest() {
         MockitoAnnotations.initMocks(this);
-        tag = new Tag(1l);
+        tag = new Tag(1L);
         tag.setName("Testing tag 1.");
 
         reference = Mockito.mock(Reference.class);
