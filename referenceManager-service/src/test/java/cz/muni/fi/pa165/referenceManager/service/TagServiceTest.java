@@ -2,7 +2,7 @@ package cz.muni.fi.pa165.referenceManager.service;
 
 import cz.muni.fi.pa165.referenceManager.dao.TagDao;
 import cz.muni.fi.pa165.referenceManager.entity.Tag;
-import cz.muni.fi.pa165.referenceManager.service.config.ServiceConfiguration;
+import cz.muni.fi.pa165.referenceManager.config.ServiceConfiguration;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
