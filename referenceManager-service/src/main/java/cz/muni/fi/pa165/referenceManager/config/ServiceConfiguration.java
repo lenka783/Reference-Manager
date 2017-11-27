@@ -1,4 +1,4 @@
-package cz.muni.fi.pa165.referenceManager.service.config;
+package cz.muni.fi.pa165.referenceManager.config;
 
 
 import cz.muni.fi.pa165.referenceManager.config.PersistenceApplicationContext;
