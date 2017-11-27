@@ -1,12 +1,11 @@
 package cz.muni.fi.pa165.referenceManager.service;
 
-import cz.muni.fi.pa165.referenceManager.dto.ReferenceDTO;
 import cz.muni.fi.pa165.referenceManager.entity.Reference;
 import cz.muni.fi.pa165.referenceManager.entity.Tag;
 import cz.muni.fi.pa165.referenceManager.entity.User;
 import cz.muni.fi.pa165.referenceManager.exceptions.ExportException;
 import cz.muni.fi.pa165.referenceManager.exceptions.ImportException;
-import cz.muni.fi.pa165.referenceManager.facade.ImportExportFacade;
+import cz.muni.fi.pa165.referenceManager.utils.CSVWriter;
 import org.jbibtex.BibTeXDatabase;
 import org.jbibtex.BibTeXEntry;
 import org.jbibtex.BibTeXFormatter;
@@ -36,6 +35,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * @author David Šarman
+ */
 @Service
 public class ImportExportServiceImpl implements ImportExportService {
     private final static Logger log = LoggerFactory.getLogger(ImportExportServiceImpl.class);
@@ -57,7 +59,7 @@ public class ImportExportServiceImpl implements ImportExportService {
 
     public BibTeXDatabase getBibDatabaseFromFile(File file) throws ImportException {
         BibTeXDatabase database = null;
-        try(Reader fileReader = new FileReader(file)) {
+        try (Reader fileReader = new FileReader(file)) {
             BibTeXParser parser = new BibTeXParser();
             database = parser.parseFully(fileReader);
         } catch (FileNotFoundException e) {
@@ -143,7 +145,7 @@ public class ImportExportServiceImpl implements ImportExportService {
     }
 
     private BibTeXDatabase createDatabase(Set<Reference> references) {
-        BibTeXDatabase database =  new BibTeXDatabase();
+        BibTeXDatabase database = new BibTeXDatabase();
         for (Reference reference : references) {
             String entryKeyString = reference.getTitle().replace(" ", "_").toLowerCase();
             entryKeyString = Normalizer.normalize(entryKeyString, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
@@ -200,14 +202,14 @@ public class ImportExportServiceImpl implements ImportExportService {
     }
 
     @Override
-    public File exportReferences(Tag tag) throws ExportException {
+    public File exportReferencesToBibtex(Tag tag) throws ExportException {
         Set<Reference> references = tag.getReferences();
 
         BibTeXDatabase database = createDatabase(references);
-        File exportFile = createExportFile(EXPORT_FILENAME_START + tag.getId());
+        File exportFile = createExportFile(EXPORT_FILENAME_START + tag.getId() + ".bib");
         BibTeXFormatter formatter = new BibTeXFormatter();
 
-        try(Writer fileWriter = new FileWriter(exportFile)) {
+        try (Writer fileWriter = new FileWriter(exportFile)) {
             formatter.format(database, fileWriter);
         } catch (IOException e) {
             String errorMsg = "Exception " + e + " occurred while writing to export file";
@@ -216,6 +218,51 @@ public class ImportExportServiceImpl implements ImportExportService {
         }
 
         return exportFile;
+    }
+
+    @Override
+    public File exportReferencesToCsv(Tag tag) throws ExportException {
+        Set<Reference> references = tag.getReferences();
+
+        List<List<String>> csvData = getCSVData(references);
+        File exportFile = createExportFile(EXPORT_FILENAME_START + tag.getId() + ".csv");
+
+        return CSVWriter.writeFile(csvData, exportFile);
+    }
+
+    private List<List<String>> getCSVData(Set<Reference> references) {
+        List<List<String>> result = new ArrayList<>();
+
+        List<String> header = new ArrayList<>();
+        header.add("title");
+        header.add("authors");
+        header.add("venue");
+        header.add("pages");
+        result.add(header);
+
+        for (Reference reference : references) {
+            List<String> line = new ArrayList<>();
+            line.add((reference.getTitle() == null) ? " " : reference.getTitle());
+
+            List<String> authors = reference.getAuthors();
+            String authorsString = " ";
+            if (authors != null) {
+                authorsString = String.join(MULTIPLE_AUTHORS_SEPARATOR, authors);
+            }
+            line.add(authorsString);
+
+            line.add((reference.getVenue() == null) ? " " : reference.getVenue());
+
+            Integer pagesStart = reference.getPagesStart();
+            Integer pagesEnd = reference.getPagesEnd();
+            String pagesString = " ";
+            if (pagesStart != null && pagesEnd != null) {
+                pagesString = pagesStart + "-" + pagesEnd;
+            }
+            line.add(pagesString);
+            result.add(line);
+        }
+        return result;
     }
 
     private StringValue createStringValue(String value) {

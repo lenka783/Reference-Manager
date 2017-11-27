@@ -1,14 +1,10 @@
-package cz.muni.fi.pa165.referenceManager;
+package cz.muni.fi.pa165.referenceManager.service;
 
 
 import cz.muni.fi.pa165.referenceManager.entity.Reference;
 import cz.muni.fi.pa165.referenceManager.entity.Tag;
 import cz.muni.fi.pa165.referenceManager.entity.User;
-import cz.muni.fi.pa165.referenceManager.service.ImportExportService;
-import cz.muni.fi.pa165.referenceManager.service.ImportExportServiceImpl;
-import cz.muni.fi.pa165.referenceManager.service.ReferenceService;
-import cz.muni.fi.pa165.referenceManager.service.TagService;
-import cz.muni.fi.pa165.referenceManager.service.UserService;
+import cz.muni.fi.pa165.referenceManager.exceptions.ExportException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -48,13 +44,18 @@ public class ImportExportServiceImplTest {
         service.importReferences(null, null, null);
     }
 
-    @Before
-    public void setUp() {
-        URL url = getClass().getClassLoader().getResource(service.EXPORT_FILENAME_START + 1);
+    private void tryDelete(String filename) {
+        URL url = getClass().getClassLoader().getResource(filename);
         if (url != null) {
             File file = new File(url.getFile());
             file.delete();
         }
+    }
+
+    @Before
+    public void setUp() {
+        tryDelete(service.EXPORT_FILENAME_START + 1 + ".bib");
+        tryDelete(service.EXPORT_FILENAME_START + 1 + ".csv");
     }
 
     private List<Reference> getTestData() {
@@ -94,9 +95,14 @@ public class ImportExportServiceImplTest {
         return new File(classLoader.getResource("importBibTeXExample.bibtex").getFile());
     }
 
-    private File getTestExportFile() {
+    private File getTestExportBibTeXFile() {
         ClassLoader classLoader = getClass().getClassLoader();
         return new File(classLoader.getResource("expectedBibTeXExport.bibtex").getFile());
+    }
+
+    private File getTestExportCSVFile() {
+        ClassLoader classLoader = getClass().getClassLoader();
+        return new File(classLoader.getResource("expectedCSVExport.csv").getFile());
     }
 
     @Test
@@ -115,19 +121,45 @@ public class ImportExportServiceImplTest {
     }
 
     @Test
-    public void exportReferences() throws Exception {
+    public void exportReferencesToBibtext() throws Exception {
+        Tag tag = getTestTag();
+
+        File exportedFile = service.exportReferencesToBibtex(tag);
+
+        String exportedFileString = new String(Files.readAllBytes(exportedFile.toPath()), Charset.defaultCharset());
+        String expectedFileString = new String(Files.readAllBytes(getTestExportBibTeXFile().toPath()), Charset.defaultCharset());
+
+        assertEquals("Files should be the same", expectedFileString, exportedFileString);
+    }
+
+    @Test
+    public void exportReferencesToCSV() throws Exception {
+        Tag tag = getTestTag();
+
+        File exportedFile = service.exportReferencesToCsv(tag);
+
+        String exportedFileString = new String(Files.readAllBytes(exportedFile.toPath()), Charset.defaultCharset());
+        String expectedFileString = new String(Files.readAllBytes(getTestExportCSVFile().toPath()), Charset.defaultCharset());
+
+        assertEquals("Files should be the same", expectedFileString, exportedFileString);
+    }
+
+    private Tag getTestTag() {
         Set<Reference> references = new HashSet<>(getTestData());
         Tag tag = new Tag();
         tag.setName("Test tag");
         tag.setId(1L);
         tag.setReferences(references);
 
-        File exportedFile = service.exportReferences(tag);
+        return tag;
+    }
 
-        String exportedFileString = new String(Files.readAllBytes(exportedFile.toPath()), Charset.defaultCharset());
-        String expectedFileString = new String(Files.readAllBytes(getTestExportFile().toPath()), Charset.defaultCharset());
+    @Test(expected = ExportException.class)
+    public void exportMultipleFail() throws  Exception {
+        Tag tag = getTestTag();
 
-        assertEquals("Files should be the same", expectedFileString, exportedFileString);
+        service.exportReferencesToBibtex(tag);
+        service.exportReferencesToBibtex(tag);
     }
 
 }
