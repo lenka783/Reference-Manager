@@ -19,6 +19,7 @@ public class Tag {
     private Long id;
 
     @NotNull
+    @Column(nullable = false)
     private String name;
 
     @ManyToMany()
@@ -65,6 +66,14 @@ public class Tag {
 
     public void setReferences(Set<Reference> references) {
         this.references = references;
+    }
+
+    public void addReference(Reference reference) {
+        references.add(reference);
+    }
+
+    public void removeReference(Reference reference) {
+        references.remove(reference);
     }
 
     public void addUser(User user) {

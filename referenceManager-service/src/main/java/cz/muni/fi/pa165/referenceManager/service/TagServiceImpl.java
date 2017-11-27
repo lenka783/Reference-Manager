@@ -1,8 +1,10 @@
 package cz.muni.fi.pa165.referenceManager.service;
 
+import cz.muni.fi.pa165.referenceManager.dao.ReferenceDao;
 import cz.muni.fi.pa165.referenceManager.dao.TagDao;
 import cz.muni.fi.pa165.referenceManager.entity.Reference;
 import cz.muni.fi.pa165.referenceManager.entity.Tag;
+import cz.muni.fi.pa165.referenceManager.exceptions.ReferenceManagerServiceException;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
@@ -49,17 +51,25 @@ public class TagServiceImpl implements TagService {
 
     @Override
     public void addReference(Tag tag, Reference reference) {
-        Set<Reference> references = tag.getReferences();
-        references.add(reference);
-        tag.setReferences(references);
+        if (tag.getReferences().contains(reference)) {
+            throw new ReferenceManagerServiceException(
+                "Tag already contains this reference. Tag: " +
+                    tag.getId() + ", reference: " +
+                    reference.getId());
+        }
+        tag.addReference(reference);
         tagDao.update(tag);
     }
 
     @Override
     public void removeReference(Tag tag, Reference reference) {
-        Set<Reference> references = tag.getReferences();
-        references.remove(reference);
-        tag.setReferences(references);
+        if (!tag.getReferences().contains(reference)) {
+            throw new ReferenceManagerServiceException(
+                "Tag doesn't contain the reference. Tag: " +
+                    tag.getId() + ", reference: " +
+                    reference.getId());
+        }
+        tag.removeReference(reference);
         tagDao.update(tag);
     }
 }
