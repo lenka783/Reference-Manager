@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 
 /**
+ * Interface representing TagService
+ *
  * @author Lenka Smitalova
  */
 @Service
@@ -16,7 +18,7 @@ public interface TagService {
 
     void updateTagName(Long tagId, String newName);
 
-    void remove(Tag tag);
+    void remove(Long tagId);
 
     Tag findById(Long tagId);
 

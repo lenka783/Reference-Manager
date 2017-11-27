@@ -1,9 +1,6 @@
 package cz.muni.fi.pa165.referenceManager.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -21,6 +18,7 @@ public class Note {
     private Long id;
 
     @NotNull
+    @Column(nullable = false)
     private String text;
 
     public Note() {

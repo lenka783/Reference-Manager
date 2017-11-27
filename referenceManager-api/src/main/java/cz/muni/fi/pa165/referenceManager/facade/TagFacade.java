@@ -5,6 +5,8 @@ import cz.muni.fi.pa165.referenceManager.dto.TagDTO;
 import java.util.List;
 
 /**
+ * Interface representing the TagFacade.
+ *
  * @author Lenka Smitalova
  */
 public interface TagFacade {

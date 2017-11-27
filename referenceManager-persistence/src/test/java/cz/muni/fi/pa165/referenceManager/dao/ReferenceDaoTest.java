@@ -1,6 +1,6 @@
 package cz.muni.fi.pa165.referenceManager.dao;
 
-import cz.muni.fi.pa165.referenceManager.PersistenceApplicationContext;
+import cz.muni.fi.pa165.referenceManager.config.PersistenceApplicationContext;
 import cz.muni.fi.pa165.referenceManager.entity.Reference;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,7 +10,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceException;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.HashSet;

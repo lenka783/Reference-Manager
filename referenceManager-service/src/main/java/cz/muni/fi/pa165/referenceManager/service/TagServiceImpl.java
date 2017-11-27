@@ -10,6 +10,8 @@ import java.util.Collection;
 import java.util.Set;
 
 /**
+ * Implementation of TagService interface.
+ *
  * @author Lenka Smitalova
  */
 @Service
@@ -31,7 +33,8 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    public void remove(Tag tag) {
+    public void remove(Long tagId) {
+        Tag tag = findById(tagId);
         tagDao.remove(tag);
     }
 

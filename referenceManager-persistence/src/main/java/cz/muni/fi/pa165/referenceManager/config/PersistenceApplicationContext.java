@@ -1,4 +1,4 @@
-package cz.muni.fi.pa165.referenceManager;
+package cz.muni.fi.pa165.referenceManager.config;
 
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.context.annotation.Bean;

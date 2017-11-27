@@ -8,6 +8,8 @@ import javax.inject.Inject;
 import java.util.Collection;
 
 /**
+ * Implementation of NoteService interface.
+ *
  * @author Lenka Smitalova
  */
 @Service
@@ -22,13 +24,14 @@ public class NoteServiceImpl implements NoteService{
 
     @Override
     public void changeNoteText(Long noteId, String newText) {
-        Note note = noteDao.findById(noteId);
+        Note note = findById(noteId);
         note.setText(newText);
         noteDao.update(note);
     }
 
     @Override
-    public void remove(Note note) {
+    public void remove(Long noteId) {
+        Note note = findById(noteId);
         noteDao.remove(note);
     }
 

@@ -5,6 +5,8 @@ import cz.muni.fi.pa165.referenceManager.dto.NoteDTO;
 import java.util.List;
 
 /**
+ * Interface representing the NoteFacade.
+ *
  * @author Lenka Smitalova
  */
 public interface NoteFacade {
