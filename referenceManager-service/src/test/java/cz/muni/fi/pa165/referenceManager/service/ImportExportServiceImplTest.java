@@ -10,10 +10,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.internal.matchers.Any;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -127,8 +127,8 @@ public class ImportExportServiceImplTest {
 
         File exportedFile = service.exportReferencesToBibtex(tag);
 
-        String exportedFileString = new String(Files.readAllBytes(exportedFile.toPath()), Charset.defaultCharset());
-        String expectedFileString = new String(Files.readAllBytes(getTestExportBibTeXFile().toPath()), Charset.defaultCharset());
+        String exportedFileString = getNormalizedFileString(exportedFile);
+        String expectedFileString = getNormalizedFileString(getTestExportBibTeXFile());
 
         assertEquals("Files should be the same", expectedFileString, exportedFileString);
     }
@@ -139,10 +139,16 @@ public class ImportExportServiceImplTest {
 
         File exportedFile = service.exportReferencesToCsv(tag);
 
-        String exportedFileString = new String(Files.readAllBytes(exportedFile.toPath()), Charset.defaultCharset());
-        String expectedFileString = new String(Files.readAllBytes(getTestExportCSVFile().toPath()), Charset.defaultCharset());
+        String exportedFileString = getNormalizedFileString(exportedFile);
+        String expectedFileString = getNormalizedFileString(getTestExportCSVFile());
 
         assertEquals("Files should be the same", expectedFileString, exportedFileString);
+    }
+
+    private String getNormalizedFileString(File exportedFile) throws IOException {
+        String result = new String(Files.readAllBytes(exportedFile.toPath()), Charset.defaultCharset());
+        result = result.replaceAll("\\r\\n", "\n");
+        return result.replaceAll("\\r", "\n");
     }
 
     private Tag getTestTag() {
