@@ -26,5 +26,6 @@
         <module>referenceManager-api</module>
         <module>referenceManager-persistence</module>
         <module>referenceManager-service</module>
+        <module>referenceManager-react</module>
     </modules>
 </project>
