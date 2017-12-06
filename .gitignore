@@ -29,3 +29,7 @@ buildNumber.properties
 # Other #
 *.log
 .DS_Store
+
+# React
+node_modules/
+npm/
