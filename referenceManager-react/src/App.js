@@ -1,21 +1,46 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import {Container, Dropdown, Header, Image, Menu} from 'semantic-ui-react'
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
-}
+const FixedMenuLayout = () => (
+    <div>
+        <Menu fixed='top' inverted>
+            <Container>
+                <Menu.Item as='a' header>
+                    <Image
+                        size='mini'
+                        src='/logo.png'
+                        style={{marginRight: '1.5em'}}
+                    />
+                    Reference Manager
+                </Menu.Item>
+                <Menu.Item as='a'>Home</Menu.Item>
 
-export default App;
+                <Dropdown item simple text='Dropdown'>
+                    <Dropdown.Menu>
+                        <Dropdown.Item>List Item</Dropdown.Item>
+                        <Dropdown.Item>List Item</Dropdown.Item>
+                        <Dropdown.Divider/>
+                        <Dropdown.Header>Header Item</Dropdown.Header>
+                        <Dropdown.Item>
+                            <i className='dropdown icon'/>
+                            <span className='text'>Submenu</span>
+                            <Dropdown.Menu>
+                                <Dropdown.Item>List Item</Dropdown.Item>
+                                <Dropdown.Item>List Item</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown.Item>
+                        <Dropdown.Item>List Item</Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
+            </Container>
+        </Menu>
+
+        <Container text style={{marginTop: '7em'}}>
+            <Header as='h1'>Semantic UI React Fixed Template</Header>
+            <p>This is a basic fixed menu template using fixed size containers.</p>
+            <p>A text container is used for the main container, which is useful for single column layouts.</p>
+        </Container>
+    </div>
+)
+
+export default FixedMenuLayout
