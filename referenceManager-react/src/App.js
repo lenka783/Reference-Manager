@@ -36,7 +36,7 @@ class App extends React.Component {
                     </Container>
                 </Menu>
 
-                <Container text style={{marginTop: '7em'}}>
+                <Container style={{marginTop: '7em'}}>
                     {this.props.children}
                 </Container>
             </div>

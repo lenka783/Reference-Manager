@@ -37,54 +37,6 @@
             </plugin>
 
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>1.3.2</version>
-                <executions>
-                    <!-- The following will ensure `npm install` is called
-                         before anything else during the 'Default Lifecycle' -->
-                    <execution>
-                        <id>npm install (initialize)</id>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                        <phase>initialize</phase>
-                        <configuration>
-                            <executable>npm</executable>
-                            <arguments>
-                                <argument>install</argument>
-                            </arguments>
-                        </configuration>
-                    </execution>
-                    <!-- The following will ensure `npm install` is called
-                         before anything else during the 'Clean Lifecycle' -->
-                    <execution>
-                        <id>npm install (clean)</id>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                        <phase>pre-clean</phase>
-                        <configuration>
-                            <executable>npm</executable>
-                            <arguments>
-                                <argument>install</argument>
-                            </arguments>
-                        </configuration>
-                    </execution>
-                </executions>
-
-                <configuration>
-                    <environmentVariables>
-                        <CI>true</CI>
-                        <!-- The following parameters create an NPM sandbox for CI -->
-                        <NPM_CONFIG_PREFIX>${basedir}/npm</NPM_CONFIG_PREFIX>
-                        <NPM_CONFIG_CACHE>${NPM_CONFIG_PREFIX}/cache</NPM_CONFIG_CACHE>
-                        <NPM_CONFIG_TMP>${project.build.directory}/npmtmp</NPM_CONFIG_TMP>
-                    </environmentVariables>
-                </configuration>
-            </plugin>
-
-            <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.2</version>
@@ -93,6 +45,45 @@
                     <path>/pa165</path>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+                <!-- Use the latest released version:
+                https://repo1.maven.org/maven2/com/github/eirslett/frontend-maven-plugin/ -->
+                <version>1.6</version>
+
+                <executions>
+                    <execution>
+                        <!-- optional: you don't really need execution ids, but it looks nice in your build log. -->
+                        <id>install node and yarn</id>
+                        <goals>
+                            <goal>install-node-and-yarn</goal>
+                        </goals>
+                        <!-- optional: default phase is "generate-resources" -->
+                        <phase>generate-resources</phase>
+                        <configuration>
+                            <nodeVersion>v9.3.0</nodeVersion>
+                            <yarnVersion>v1.3.2</yarnVersion>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>yarn install</id>
+                        <goals>
+                            <goal>yarn</goal>
+                        </goals>
+                        <configuration>
+                            <!-- optional: The default argument is actually
+                            "install", so unless you need to run some other yarn command,
+                            you can remove this whole <configuration> section.
+                            -->
+                            <arguments>install</arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
 
@@ -102,31 +93,27 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
+                        <groupId>com.github.eirslett</groupId>
+                        <artifactId>frontend-maven-plugin</artifactId>
+                        <!-- Use the latest released version:
+                        https://repo1.maven.org/maven2/com/github/eirslett/frontend-maven-plugin/ -->
+                        <version>1.6</version>
+
                         <executions>
                             <execution>
-                                <id>npm run start (dev)</id>
+                                <id>yarn start (dev server)</id>
                                 <goals>
-                                    <goal>exec</goal>
+                                    <goal>yarn</goal>
                                 </goals>
-                                <phase>compile</phase>
                                 <configuration>
-                                    <executable>npm</executable>
-                                    <arguments>
-                                        <argument>run</argument>
-                                        <argument>start</argument>
-                                    </arguments>
+                                    <!-- optional: The default argument is actually
+                                    "install", so unless you need to run some other yarn command,
+                                    you can remove this whole <configuration> section.
+                                    -->
+                                    <arguments>run start</arguments>
                                 </configuration>
                             </execution>
                         </executions>
-
-                        <configuration>
-                            <environmentVariables>
-                                <PUBLIC_URL>http://localhost:8080/pa165</PUBLIC_URL>
-                                <REACT_APP_ROUTER_BASE>/pa165</REACT_APP_ROUTER_BASE>
-                            </environmentVariables>
-                        </configuration>
                     </plugin>
                 </plugins>
             </build>
@@ -140,32 +127,27 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
+                        <groupId>com.github.eirslett</groupId>
+                        <artifactId>frontend-maven-plugin</artifactId>
+                        <!-- Use the latest released version:
+                        https://repo1.maven.org/maven2/com/github/eirslett/frontend-maven-plugin/ -->
+                        <version>1.6</version>
 
                         <executions>
                             <execution>
-                                <id>npm run build (compile)</id>
+                                <id>yarn build (production)</id>
                                 <goals>
-                                    <goal>exec</goal>
+                                    <goal>yarn</goal>
                                 </goals>
-                                <phase>compile</phase>
                                 <configuration>
-                                    <executable>npm</executable>
-                                    <arguments>
-                                        <argument>run</argument>
-                                        <argument>build</argument>
-                                    </arguments>
+                                    <!-- optional: The default argument is actually
+                                    "install", so unless you need to run some other yarn command,
+                                    you can remove this whole <configuration> section.
+                                    -->
+                                    <arguments>run build</arguments>
                                 </configuration>
                             </execution>
                         </executions>
-
-                        <configuration>
-                            <environmentVariables>
-                                <PUBLIC_URL>http://production-host-url.com/${project.artifactId}</PUBLIC_URL>
-                                <REACT_APP_ROUTER_BASE>/${project.artifactId}</REACT_APP_ROUTER_BASE>
-                            </environmentVariables>
-                        </configuration>
                     </plugin>
                 </plugins>
             </build>
