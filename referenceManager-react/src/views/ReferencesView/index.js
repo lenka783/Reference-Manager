@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import ReferenceCard from "../../components/ReferenceCard";
 import {Card} from 'semantic-ui-react'
 import faker from 'faker';
 import _ from 'lodash';
+import ReferenceCard from "../../components/ReferenceCard";
 
 const references = [...Array(20).keys()].map(i => {
     return {
@@ -16,8 +16,8 @@ const references = [...Array(20).keys()].map(i => {
 });
 
 export class ReferencesView extends Component {
-    editReference = (id) => () => {
-        console.log(`Edited reference with id ${id}`)
+    editReference = (id) => (values) => {
+        console.log(`Edited reference with id ${id} and values `, values)
     };
 
     deleteReference = (id) => () => {
@@ -30,11 +30,7 @@ export class ReferencesView extends Component {
                 <Card.Group>
                     {_.map(references, reference => (
                         <ReferenceCard key={reference.id}
-                                       title={reference.title}
-                                       authors={reference.authors}
-                                       venue={reference.venue}
-                                       pagesStart={reference.pagesStart}
-                                       pagesEnd={reference.pagesEnd}
+                                       reference={reference}
                                        onEdit={this.editReference(reference.id)}
                                        onDelete={this.deleteReference(reference.id)}
                         />

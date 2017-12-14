@@ -2,6 +2,7 @@ import createHistory from "history/createBrowserHistory";
 import {applyMiddleware, combineReducers, createStore} from "redux";
 import {routerMiddleware, routerReducer} from "react-router-redux";
 import {composeWithDevTools} from "redux-devtools-extension";
+import {reducer as formReducer} from 'redux-form';
 
 
 const history = createHistory();
@@ -12,9 +13,10 @@ const middlewareWithDevTools = composeWithDevTools(
 
 const store = createStore(
     combineReducers({
-        router: routerReducer
+        router: routerReducer,
+        form: formReducer
     }),
     middlewareWithDevTools
 );
 
-export { store, history };
+export {store, history};

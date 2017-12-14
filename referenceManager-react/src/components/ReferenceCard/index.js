@@ -1,24 +1,29 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {Button, Card, List} from 'semantic-ui-react';
 import ReferenceCardListItem from "./referenceCardListItem";
+import ReferenceEdit from '../ReferenceEdit';
+import referencePropType from "../../utils/referencePropTypes";
 
 
-const ReferenceCard = ({title, authors, venue, pagesStart, pagesEnd, onEdit, onDelete}) => (
+const ReferenceCard = ({reference, onEdit, onDelete, onSubmit}) => (
     <Card>
         <Card.Content>
-            <Card.Header>{title}</Card.Header>
-            <Card.Meta>{authors}</Card.Meta>
+            <Card.Header>{reference.title}</Card.Header>
+            <Card.Meta>{reference.authors}</Card.Meta>
             <Card.Description>
                 <List>
-                    <ReferenceCardListItem label='Venue:' icon='home' content={venue}/>
+                    <ReferenceCardListItem label='Venue:' icon='home' content={reference.venue}/>
                     <ReferenceCardListItem label='Pages:' icon='book'
-                                           content={`${pagesStart}-${pagesEnd}`}/>
+                                           content={`${reference.pagesStart}-${reference.pagesEnd}`}/>
                 </List>
                 <Card.Content extra>
                     <div className='ui two buttons'>
-                        <Button basic color='black' onClick={onEdit}>
+                        <ReferenceEdit reference={reference}
+                                       onSubmit={onEdit}>
                             Edit
-                        </Button>
+                        </ReferenceEdit>
+
                         <Button basic color='red' onClick={onDelete}>
                             Delete
                         </Button>
@@ -28,5 +33,11 @@ const ReferenceCard = ({title, authors, venue, pagesStart, pagesEnd, onEdit, onD
         </Card.Content>
     </Card>
 );
+
+ReferenceCard.propTypes = {
+    reference: referencePropType,
+    onEdit: PropTypes.func.isRequired,
+    onDelete: PropTypes.func.isRequired
+};
 
 export default ReferenceCard
