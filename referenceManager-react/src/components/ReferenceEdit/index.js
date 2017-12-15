@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Button, Form, Modal} from "semantic-ui-react";
-import {InputField} from "react-semantic-redux-form";
-import {Field, reduxForm} from "redux-form";
-import referencePropType from "../../utils/referencePropTypes";
+import { Button, Form, Modal } from 'semantic-ui-react';
+import { InputField } from 'react-semantic-redux-form';
+import { Field, reduxForm } from 'redux-form';
+import referencePropType from '../../utils/referencePropTypes';
 
 // This sets the initial values in the edit form
-const ReferenceEditContainer = ({children, reference, onSubmit}) => (
+const ReferenceEditContainer = ({children, reference, headerText, submitButtonText, onSubmit}) => (
     <ReferenceEditForm reference={reference}
                        initialValues={{
                            title: reference.title,
@@ -15,7 +15,9 @@ const ReferenceEditContainer = ({children, reference, onSubmit}) => (
                            pagesStart: reference.pagesStart,
                            pagesEnd: reference.pagesEnd
                        }}
-                       onSubmit={onSubmit}>
+                       onSubmit={onSubmit}
+                       headerText={headerText}
+                       submitButtonText={submitButtonText}>
         {children}
     </ReferenceEditForm>
 );
@@ -31,14 +33,15 @@ class ReferenceEdit extends React.Component {
         </Button>
     );
 
-    render() {
-        const {handleSubmit} = this.props;
+    render () {
+        const {handleSubmit, headerText} = this.props;
         return (
             <Modal trigger={this.openModalButton()}
                    open={this.state.modalOpen}
-                   onClose={this.handleClose}>
+                   onClose={this.handleClose}
+                   closeIcon>
                 <Modal.Header>
-                    Edit reference
+                    {headerText}
                 </Modal.Header>
                 <Modal.Content>
                     <Form onSubmit={handleSubmit}>
@@ -57,20 +60,14 @@ class ReferenceEdit extends React.Component {
                         <Field name='pagesEnd' component={InputField}
                                label='To page'/>
 
-                        <Button style={styles.submitButton}
+                        <Button fluid
                                 color='green'
                                 onClick={this.handleClose}>
                             Submit</Button>
                     </Form>
                 </Modal.Content>
             </Modal>
-        )
-    }
-}
-
-const styles = {
-    submitButton: {
-        width: '100%'
+        );
     }
 }
 
@@ -92,4 +89,4 @@ const ReferenceEditForm = reduxForm({
     form: 'ReferenceEdit'
 })(ReferenceEdit);
 
-export default ReferenceEditContainer
+export default ReferenceEditContainer;

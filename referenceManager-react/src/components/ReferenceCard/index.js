@@ -20,7 +20,8 @@ const ReferenceCard = ({reference, onEdit, onDelete, onSubmit}) => (
                 <Card.Content extra>
                     <div className='ui two buttons'>
                         <ReferenceEdit reference={reference}
-                                       onSubmit={onEdit}>
+                                       onSubmit={onEdit}
+                                       headerText='Edit reference'>
                             Edit
                         </ReferenceEdit>
 
