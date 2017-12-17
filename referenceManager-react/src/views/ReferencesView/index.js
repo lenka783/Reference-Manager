@@ -7,7 +7,7 @@ import ReferenceCard from "../../components/ReferenceCard";
 const references = [...Array(20).keys()].map(i => {
     return {
         id: i,
-        title: faker.lorem.words(),
+        title: faker.lorem.words(5),
         authors: faker.name.findName(),
         venue: faker.address.streetAddress(),
         pagesStart: faker.random.number(),
