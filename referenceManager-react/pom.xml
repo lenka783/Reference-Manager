@@ -145,6 +145,9 @@
                                     you can remove this whole <configuration> section.
                                     -->
                                     <arguments>run build</arguments>
+                                    <environmentVariables>
+                                        <PUBLIC_URL>/pa165</PUBLIC_URL>
+                                    </environmentVariables>
                                 </configuration>
                             </execution>
                         </executions>
