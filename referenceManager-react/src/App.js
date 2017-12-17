@@ -1,22 +1,11 @@
-import React from 'react'
-import {connect} from 'react-redux';
-import {push} from 'react-router-redux';
-import {Container, Menu} from 'semantic-ui-react'
-import {HOME_PATH, REFERENCES_PATH} from "./routes";
-
+import React from 'react';
+import { Container, Menu } from 'semantic-ui-react';
+import { HOME_PATH, REFERENCES_PATH } from './router/routes';
+import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router';
 
 class App extends React.Component {
-
-
-    goHome = () => {
-        this.props.dispatch(push(HOME_PATH))
-    };
-
-    goToReferences = () => {
-        this.props.dispatch(push(REFERENCES_PATH))
-    };
-
-    render() {
+    render () {
         const homeActive = this.props.location && this.props.location.pathname === HOME_PATH;
         const referencesActive = this.props.location && this.props.location.pathname === REFERENCES_PATH;
 
@@ -24,30 +13,20 @@ class App extends React.Component {
             <div>
                 <Menu fixed='top' inverted>
                     <Container>
-                        <Menu.Item as='a' header onClick={this.goHome}>
+                        <Menu.Item header as={Link} to={HOME_PATH}>
                             Reference Manager
                         </Menu.Item>
-                        <Menu.Item as='a' onClick={this.goHome} active={homeActive}>
+                        <Menu.Item as={Link} to={HOME_PATH} active={homeActive}>
                             Home
                         </Menu.Item>
-                        <Menu.Item as='a' onClick={this.goToReferences} active={referencesActive}>
+                        <Menu.Item as={Link} to={REFERENCES_PATH} active={referencesActive}>
                             References
                         </Menu.Item>
                     </Container>
                 </Menu>
-
-                <Container style={{marginTop: '7em'}}>
-                    {this.props.children}
-                </Container>
             </div>
         );
     }
 }
 
-const mapStateToProps = (state, ownProps) => {
-    return {
-        location: state.router.location,
-    };
-};
-
-export default connect(mapStateToProps)(App);
+export default withRouter(App);
