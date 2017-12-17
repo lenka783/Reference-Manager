@@ -3,3 +3,8 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+/* Prevent fixed menu from flickering */
+.ui.fixed.menu{
+    transform: translateZ(0)
+}
