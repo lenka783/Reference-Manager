@@ -4,7 +4,7 @@ body {
   font-family: sans-serif;
 }
 
-/* Prevent fixed menu from flickering */
-.ui.fixed.menu{
-    transform: translateZ(0)
+/* Fix menu flicker */
+.ui.menu.fixed {
+    transform: translateZ(0);
 }
