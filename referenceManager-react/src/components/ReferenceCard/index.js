@@ -1,15 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Button, Card, List} from 'semantic-ui-react';
+import {Button, Card, List, Checkbox} from 'semantic-ui-react';
 import ReferenceCardListItem from "./referenceCardListItem";
 import ReferenceEdit from '../ReferenceEdit';
 import referencePropType from "../../utils/referencePropTypes";
 
+const styles = {
+    checkbox: {
+        position: 'absolute',
+        top: '1em',
+        right: '1em',
+    },
+    cardHeader: {
+        paddingRight: '2em',
+    },
+    cardExtra: {
+        marginTop: '1em',
+    },
+    cardContent: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+    },
+};
 
 const ReferenceCard = ({reference, onEdit, onDelete, onSubmit}) => (
     <Card>
-        <Card.Content>
-            <Card.Header>{reference.title}</Card.Header>
+        <Card.Content style={styles.cardContent}>
+            <Checkbox style={styles.checkbox}/>
+            <Card.Header style={styles.cardHeader}>{reference.title}</Card.Header>
             <Card.Meta>{reference.authors}</Card.Meta>
             <Card.Description>
                 <List>
@@ -17,7 +36,8 @@ const ReferenceCard = ({reference, onEdit, onDelete, onSubmit}) => (
                     <ReferenceCardListItem label='Pages:' icon='book'
                                            content={`${reference.pagesStart}-${reference.pagesEnd}`}/>
                 </List>
-                <Card.Content extra>
+            </Card.Description>
+                <Card.Content style={styles.cardExtra} extra>
                     <div className='ui two buttons'>
                         <ReferenceEdit reference={reference}
                                        onSubmit={onEdit}
@@ -30,7 +50,6 @@ const ReferenceCard = ({reference, onEdit, onDelete, onSubmit}) => (
                         </Button>
                     </div>
                 </Card.Content>
-            </Card.Description>
         </Card.Content>
     </Card>
 );
