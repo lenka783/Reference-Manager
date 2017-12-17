@@ -41,8 +41,9 @@
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.2</version>
                 <configuration>
-                    <url>http://localhost:8080/manager</url>
+                    <url>http://localhost:8080/</url>
                     <path>/pa165</path>
+                    <warSourceDirectory>${basedir}/build</warSourceDirectory>
                 </configuration>
             </plugin>
 
