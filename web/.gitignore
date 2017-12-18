@@ -8,7 +8,7 @@
 
 # production
 /build
-/webapp
+webapp
 
 # misc
 .DS_Store
