@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.referenceManager.facade;
 
+import cz.muni.fi.pa165.referenceManager.dto.NoteCreateDTO;
 import cz.muni.fi.pa165.referenceManager.dto.NoteDTO;
 
 import java.util.List;
@@ -12,11 +13,13 @@ import java.util.List;
 public interface NoteFacade {
     Long createNote(NoteDTO note);
 
+    Long createNote(NoteCreateDTO noteCreateDTO);
+
     void changeNoteText(NoteDTO noteDTO, String newText);
 
     void removeNote(Long noteId);
 
-    NoteDTO findById(NoteDTO noteDTO);
+    NoteDTO findById(Long id);
 
     List<NoteDTO> findAllNotes();
 }

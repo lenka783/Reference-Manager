@@ -65,8 +65,13 @@ public class TagController {
         logger.debug("rest deleteTag({})", id);
         try {
             tagFacade.removeTag(id);
-        } catch (Exception ex) {
-            throw new ResourceNotFoundException();
+        } catch (IllegalArgumentException ex) {
+            logger.error("tag " + id + " not found");
+            throw new ResourceNotFoundException("tag " + id + " not found");
+        } catch (Throwable ex) {
+            logger.error("cannot delete tag " + id + " :" + ex.getMessage());
+            throw new ResourceNotFoundException("Unable to delete non existing item");
+
         }
     }
 

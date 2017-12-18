@@ -67,7 +67,7 @@ public class NoteFacadeTest {
 
     @Test
     public void testFindById() {
-        noteFacade.findById(noteDTO);
+        noteFacade.findById(noteDTO.getId());
         Mockito.verify(noteService, Mockito.times(1))
             .findById(noteDTO.getId());
     }

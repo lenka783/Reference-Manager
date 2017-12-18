@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.referenceManager.facade;
 
+import cz.muni.fi.pa165.referenceManager.dto.NoteCreateDTO;
 import cz.muni.fi.pa165.referenceManager.dto.NoteDTO;
 import cz.muni.fi.pa165.referenceManager.entity.Note;
 import cz.muni.fi.pa165.referenceManager.facade.NoteFacade;
@@ -35,6 +36,13 @@ public class NoteFacadeImpl implements NoteFacade {
     }
 
     @Override
+    public Long createNote(NoteCreateDTO noteCreateDTO) {
+        Note note = mappingService.mapTo(noteCreateDTO, Note.class);
+        noteService.create(note);
+        return note.getId();
+    }
+
+    @Override
     public void changeNoteText(NoteDTO noteDTO, String newText) {
         noteService.changeNoteText(noteDTO.getId(), newText);
     }
@@ -45,8 +53,8 @@ public class NoteFacadeImpl implements NoteFacade {
     }
 
     @Override
-    public NoteDTO findById(NoteDTO noteDTO) {
-        Note note = noteService.findById(noteDTO.getId());
+    public NoteDTO findById(Long id) {
+        Note note = noteService.findById(id);
         return (note == null) ? null : mappingService.mapTo(note, NoteDTO.class);
     }
 
