@@ -3,6 +3,9 @@ import {Card} from 'semantic-ui-react'
 import faker from 'faker';
 import _ from 'lodash';
 import ReferenceCard from "../../components/ReferenceCard";
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import rest from '../../rest';
 
 const tags = [...Array(10).keys()].map(i => {
     return {
@@ -24,7 +27,13 @@ const references = [...Array(20).keys()].map(i => {
     }
 });
 
-export class ReferencesView extends Component {
+
+class ReferencesView extends Component {
+    componentDidMount() {
+        const {dispatch} = this.props;
+        dispatch(rest.actions.tags.sync())
+    }
+
     editReference = (id) => (values) => {
         console.log(`Edited reference with id ${id} and values `, values)
     };
@@ -34,6 +43,12 @@ export class ReferencesView extends Component {
     };
 
     render() {
+        const {tags} = this.props;
+        if (tags.loading || !tags.data) {
+            return (<div>
+                Loading data...
+            </div>)
+        }
         return (
             <div>
                 <Card.Group>
@@ -49,3 +64,20 @@ export class ReferencesView extends Component {
         );
     }
 }
+
+ReferencesView.propTypes = {
+    tags: PropTypes.shape({
+        loading: PropTypes.bool.isRequired,
+        data: PropTypes.shape.isRequired
+    }),
+    dispatch: PropTypes.func.isRequired
+};
+
+const mapStateToProps = (state) => {
+    return {
+        tags: state.tags
+    }};
+
+const ConnectedReferencesView = connect(mapStateToProps)(ReferencesView);
+
+export { ConnectedReferencesView as ReferencesView}
