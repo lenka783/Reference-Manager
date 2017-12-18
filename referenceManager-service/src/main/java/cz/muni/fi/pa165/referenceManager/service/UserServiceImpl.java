@@ -47,8 +47,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void registerUser(Long userId, String plainPassword) {
-        User user = new User(userId);
+    public void registerUser(User user, String plainPassword) {
         user.setPasswordHash(createPasswordHash(plainPassword));
         userDao.create(user);
     }
@@ -92,8 +91,15 @@ public class UserServiceImpl implements UserService {
     public void removeTag(Long userId, Long tagId) {
         User user = userDao.findById(userId);
         Tag tag = tagDao.findById(tagId);
+        cleanUpSharedTags(tag);
         user.removeTag(tag);
         userDao.update(user);
+    }
+
+    private void cleanUpSharedTags(Tag tag) {
+        for (User user : tag.getSharedUsers()) {
+            unshareTag(user.getId(), tag.getId());
+        }
     }
 
     @Override

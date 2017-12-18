@@ -34,10 +34,10 @@ public interface UserService {
     /**
      * Register user into the system. Plain password will be hashed
      * and then stored in database.
-     * @param userId id of user
+     * @param user user to create
      * @param plainPassword obtained password to be hashed
      */
-    void registerUser(Long userId, String plainPassword);
+    void registerUser(User user, String plainPassword);
 
     /**
      * Get all users stored in database

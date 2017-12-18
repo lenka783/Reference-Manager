@@ -80,8 +80,8 @@ public class UserFacadeTest {
     @Test
     public void testRegisterUser() {
         userFacade.registerUser(userDTO, "password");
-        Mockito.verify(userService, Mockito.times(1)).
-            registerUser(userDTO.getId(),"password");
+        Mockito.verify(userService, Mockito.times(1))
+            .registerUser(user, "password");
     }
 
     @Test
