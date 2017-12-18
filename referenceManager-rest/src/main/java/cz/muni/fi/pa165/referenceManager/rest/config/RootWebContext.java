@@ -25,8 +25,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @EnableWebMvc
 @Configuration
-@Import({MappingServiceConfiguration.class})
-@ComponentScan(basePackages = {"cz.muni.fi.pa165.rest.controllers"})
+@Import({ServiceConfiguration.class})
+@ComponentScan(basePackages = {"cz.muni.fi.pa165.referenceManager.rest.controllers"})
 public class RootWebContext extends WebMvcConfigurerAdapter {
 
     @Override
