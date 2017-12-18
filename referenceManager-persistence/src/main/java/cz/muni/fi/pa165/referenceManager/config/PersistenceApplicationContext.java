@@ -36,7 +36,6 @@ public class PersistenceApplicationContext {
     @Bean
     public DataSource db(){
         EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
-        EmbeddedDatabase db = builder.setType(EmbeddedDatabaseType.DERBY).build();
-        return db;
+        return builder.setType(EmbeddedDatabaseType.DERBY).build();
     }
 }

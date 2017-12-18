@@ -1,8 +1,9 @@
 package cz.muni.fi.pa165.referenceManager.entity;
 
+
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -22,7 +23,7 @@ public class User {
 
     @Column(unique = true)
     @NotNull
-    @Email
+    @Pattern(regexp=".+@.+\\....?")
     private String email;
 
     @NotNull
@@ -33,9 +34,6 @@ public class User {
 
     @OneToMany
     private Set<Tag> tags = new HashSet<>();
-
-    @ManyToMany
-    private Set<Tag> sharedTags = new HashSet<>();
 
     @ManyToMany
     private Set<Reference> references = new HashSet<>();
@@ -90,28 +88,12 @@ public class User {
         tags.remove(tag);
     }
 
-    public void addSharedTag(Tag tag) {
-        sharedTags.add(tag);
-    }
-
-    public void removeSharedTag(Tag tag) {
-        sharedTags.remove(tag);
-    }
-
     public Set<Reference> getReferences() {
         return references;
     }
 
     public void setReferences(Set<Reference> references) {
         this.references = references;
-    }
-
-    public Set<Tag> getSharedTags() {
-        return sharedTags;
-    }
-
-    public void setSharedTags(Set<Tag> sharedTags) {
-        this.sharedTags = sharedTags;
     }
 
     public Set<Tag> getTags() {

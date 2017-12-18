@@ -12,10 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.transaction.Transactional;
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
-import javax.validation.Validation;
-import javax.validation.Validator;
+import javax.validation.*;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -45,13 +42,13 @@ public class UserDaoTest {
         return user;
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = ValidationException.class)
     public void testEmptyUserError() {
         User user = new User();
         userDao.create(user);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = ValidationException.class)
     public void testEmptyEmailError() {
         User user = new User();
         user.setPasswordHash("password");

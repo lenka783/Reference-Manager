@@ -68,6 +68,10 @@ public class Tag {
         this.references = references;
     }
 
+    public Set<User> getSharedUsers() {
+        return users;
+    }
+
     public void addReference(Reference reference) {
         references.add(reference);
     }

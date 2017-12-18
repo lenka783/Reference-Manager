@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import javax.validation.ValidationException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -33,7 +34,7 @@ public class ReferenceDaoTest {
         referenceDao.create(null);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = ValidationException.class)
     public void testNewReferenceWithoutTitleError() {
         Reference reference = new Reference();
         referenceDao.create(reference);

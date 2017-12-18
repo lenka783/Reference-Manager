@@ -41,7 +41,7 @@ public class UserFacadeImpl implements UserFacade {
     @Override
     public void registerUser(UserDTO userDTO, String plainPassword) {
         User user = mappingService.mapTo(userDTO, User.class);
-        userService.registerUser(user.getId(), plainPassword);
+        userService.registerUser(user, plainPassword);
         userDTO.setId(user.getId());
     }
 
