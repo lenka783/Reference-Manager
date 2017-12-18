@@ -20,7 +20,7 @@ import org.jasypt.util.password.ConfigurablePasswordEncryptor;
 @Import(PersistenceApplicationContext.class)
 @ComponentScan( basePackages = {
     "cz.muni.fi.pa165.referenceManager.service",
-    "cz.muni.fi.pa165.referenceManager.service.facade"})
+    "cz.muni.fi.pa165.referenceManager.facade"})
 public class ServiceConfiguration {
 
     @Bean
