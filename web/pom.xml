@@ -84,6 +84,15 @@
                         </configuration>
                         <executions>
                             <execution>
+                                <id>yarn install</id>
+                                <goals>
+                                    <goal>yarn</goal>
+                                </goals>
+                                <configuration>
+                                    <arguments>install</arguments>
+                                </configuration>
+                            </execution>
+                            <execution>
                                 <id>yarn start (dev server)</id>
                                 <goals>
                                     <goal>yarn</goal>
