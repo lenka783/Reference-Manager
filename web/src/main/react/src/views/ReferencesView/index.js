@@ -43,11 +43,12 @@ class ReferencesView extends Component {
     componentDidMount () {
         const {dispatch} = this.props;
         dispatch(rest.actions.tags.sync());
+        dispatch(rest.actions.references.sync());
     }
 
     render () {
-        const {tags} = this.props;
-        if (tags.loading || !tags.data) {
+        const {tags, references} = this.props;
+        if (tags.loading || !tags.data || references.loading || !references.data) {
             return (<div>
                 Loading data...
             </div>);
@@ -67,7 +68,7 @@ class ReferencesView extends Component {
                 </div>
 
                 <Card.Group>
-                    {_.map(references, reference => (
+                    {_.map(references.data, reference => (
                         <ReferenceCard key={reference.id}
                                        reference={reference}
                                        onEdit={this.editReference(reference.id)}
@@ -90,7 +91,8 @@ ReferencesView.propTypes = {
 
 const mapStateToProps = (state) => {
     return {
-        tags: state.tags
+        tags: state.tags,
+        references: state.references
     };
 };
 
