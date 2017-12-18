@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Button, Card, List, Checkbox} from 'semantic-ui-react';
-import ReferenceCardListItem from "./referenceCardListItem";
+import { Button, Card, Checkbox, List } from 'semantic-ui-react';
+import ReferenceCardListItem from './referenceCardListItem';
 import ReferenceEdit from '../ReferenceEdit';
-import referencePropType from "../../utils/referencePropTypes";
+import referencePropType from '../../utils/referencePropTypes';
 import ReferenceCardListTagItem from './referenceCardListTagItem';
 
 const styles = {
@@ -39,19 +39,19 @@ const ReferenceCard = ({reference, onEdit, onDelete, onSubmit}) => (
                     <ReferenceCardListTagItem tags={reference.tags}/>
                 </List>
             </Card.Description>
-                <Card.Content style={styles.cardExtra} extra>
-                    <div className='ui two buttons'>
-                        <ReferenceEdit reference={reference}
-                                       onSubmit={onEdit}
-                                       headerText='Edit reference'>
-                            Edit
-                        </ReferenceEdit>
+            <Card.Content style={styles.cardExtra} extra>
+                <div className='ui two buttons'>
+                    <ReferenceEdit reference={reference}
+                                   onSubmit={onEdit}
+                                   headerText='Edit reference'>
+                        Edit
+                    </ReferenceEdit>
 
-                        <Button basic color='red' onClick={onDelete}>
-                            Delete
-                        </Button>
-                    </div>
-                </Card.Content>
+                    <Button basic color='red' onClick={onDelete}>
+                        Delete
+                    </Button>
+                </div>
+            </Card.Content>
         </Card.Content>
     </Card>
 );
@@ -62,4 +62,4 @@ ReferenceCard.propTypes = {
     onDelete: PropTypes.func.isRequired
 };
 
-export default ReferenceCard
+export default ReferenceCard;

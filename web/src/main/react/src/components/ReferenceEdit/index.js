@@ -1,13 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Form, Modal } from 'semantic-ui-react';
-import { InputField } from 'react-semantic-redux-form';
+import { InputField, SelectField } from 'react-semantic-redux-form';
 import { Field, reduxForm } from 'redux-form';
 import referencePropType from '../../utils/referencePropTypes';
+import { optionsFromTags } from '../../utils';
+
+const ReferenceInsertContainer = ({children, headerText, submitButtonText, onSubmit, tags}) => (
+    <ReferenceInsertForm
+        onSubmit={onSubmit}
+        headerText={headerText}
+        submitButtonText={submitButtonText}
+        tags={tags}>
+        {children}
+    </ReferenceInsertForm>
+);
 
 // This sets the initial values in the edit form
 const ReferenceEditContainer = ({children, reference, headerText, submitButtonText, onSubmit}) => (
     <ReferenceEditForm reference={reference}
+                       tags={reference.tags}
                        initialValues={{
                            title: reference.title,
                            authors: reference.authors,
@@ -34,7 +46,7 @@ class ReferenceEdit extends React.Component {
     );
 
     render () {
-        const {handleSubmit, headerText} = this.props;
+        const {handleSubmit, headerText, tags} = this.props;
         return (
             <Modal trigger={this.openModalButton()}
                    open={this.state.modalOpen}
@@ -59,6 +71,9 @@ class ReferenceEdit extends React.Component {
 
                         <Field name='pagesEnd' component={InputField}
                                label='To page'/>
+
+                        <Field multiple name='tags' component={SelectField}
+                               label='Tags' options={optionsFromTags(tags)}/>
 
                         <Button fluid
                                 color='green'
@@ -89,4 +104,9 @@ const ReferenceEditForm = reduxForm({
     form: 'ReferenceEdit'
 })(ReferenceEdit);
 
+const ReferenceInsertForm = reduxForm({
+    form: 'ReferenceInsert'
+})(ReferenceEdit);
+
 export default ReferenceEditContainer;
+export { ReferenceInsertContainer };

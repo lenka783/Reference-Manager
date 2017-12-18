@@ -1,8 +1,10 @@
-import React, {Component} from 'react';
-import {Card} from 'semantic-ui-react'
+import React, { Component } from 'react';
+import { Card } from 'semantic-ui-react';
 import faker from 'faker';
 import _ from 'lodash';
-import ReferenceCard from "../../components/ReferenceCard";
+import ReferenceCard from '../../components/ReferenceCard';
+import { ReferenceInsertContainer } from '../../components/ReferenceEdit';
+import ReferenceImport from '../../components/ReferenceEdit/referenceImport';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import rest from '../../rest';
@@ -11,7 +13,7 @@ const tags = [...Array(10).keys()].map(i => {
     return {
         id: i,
         name: faker.lorem.words(1)
-    }
+    };
 });
 
 const references = [...Array(20).keys()].map(i => {
@@ -24,33 +26,46 @@ const references = [...Array(20).keys()].map(i => {
         pagesEnd: faker.random.number(),
         notes: i / 2 === 0 ? faker.lorem.words(30) : '',
         tags: tags.slice(faker.random.number({min: 0, max: 1}), faker.random.number({min: 1, max: 9}))
-    }
+    };
 });
 
-
 class ReferencesView extends Component {
-    componentDidMount() {
+    editReference = (id) => (values) => {
+        console.log(`Edited reference with id ${id} and values `, values);
+    };
+    deleteReference = (id) => () => {
+        console.log(`Deleted reference with id ${id}`);
+    };
+    onInsertNewReference = (values) => {
+
+    };
+
+    componentDidMount () {
         const {dispatch} = this.props;
-        dispatch(rest.actions.tags.sync())
+        dispatch(rest.actions.tags.sync());
     }
 
-    editReference = (id) => (values) => {
-        console.log(`Edited reference with id ${id} and values `, values)
-    };
-
-    deleteReference = (id) => () => {
-        console.log(`Deleted reference with id ${id}`)
-    };
-
-    render() {
+    render () {
         const {tags} = this.props;
         if (tags.loading || !tags.data) {
             return (<div>
                 Loading data...
-            </div>)
+            </div>);
         }
         return (
             <div>
+                <div style={{
+                    paddingBottom: 10,
+                    display: 'flex',
+                    flexDirection: 'row',
+                }}>
+                    <ReferenceInsertContainer onSubmit={this.onInsertNewReference} tags={tags.data}
+                                              headerText='Insert new reference'>
+                        Insert new reference
+                    </ReferenceInsertContainer>
+                    <ReferenceImport/>
+                </div>
+
                 <Card.Group>
                     {_.map(references, reference => (
                         <ReferenceCard key={reference.id}
@@ -76,8 +91,9 @@ ReferencesView.propTypes = {
 const mapStateToProps = (state) => {
     return {
         tags: state.tags
-    }};
+    };
+};
 
 const ConnectedReferencesView = connect(mapStateToProps)(ReferencesView);
 
-export { ConnectedReferencesView as ReferencesView}
+export { ConnectedReferencesView as ReferencesView };

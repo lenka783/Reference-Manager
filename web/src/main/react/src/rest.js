@@ -18,6 +18,7 @@ const rest = reduxApi({
         crud: true
     }
 });
+
 rest.use("fetch", adapterFetch(fetch)); // it's necessary to point using REST backend
 rest.use("rootUrl", "http://localhost:8080/pa165/rest/");
 rest.use("responseHandler",
