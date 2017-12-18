@@ -1,4 +1,4 @@
-package cz.muni.fi.pa165.referenceManager;
+package cz.muni.fi.pa165.referenceManager.rest;
 
 import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
