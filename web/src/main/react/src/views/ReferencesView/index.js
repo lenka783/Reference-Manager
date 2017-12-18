@@ -4,6 +4,13 @@ import faker from 'faker';
 import _ from 'lodash';
 import ReferenceCard from "../../components/ReferenceCard";
 
+const tags = [...Array(10).keys()].map(i => {
+    return {
+        id: i,
+        name: faker.lorem.words(1)
+    }
+});
+
 const references = [...Array(20).keys()].map(i => {
     return {
         id: i,
@@ -12,6 +19,8 @@ const references = [...Array(20).keys()].map(i => {
         venue: faker.address.streetAddress(),
         pagesStart: faker.random.number(),
         pagesEnd: faker.random.number(),
+        notes: i / 2 === 0 ? faker.lorem.words(30) : '',
+        tags: tags.slice(faker.random.number({min: 0, max: 1}), faker.random.number({min: 1, max: 9}))
     }
 });
 

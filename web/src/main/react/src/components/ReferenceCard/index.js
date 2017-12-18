@@ -4,6 +4,7 @@ import {Button, Card, List, Checkbox} from 'semantic-ui-react';
 import ReferenceCardListItem from "./referenceCardListItem";
 import ReferenceEdit from '../ReferenceEdit';
 import referencePropType from "../../utils/referencePropTypes";
+import ReferenceCardListTagItem from './referenceCardListTagItem';
 
 const styles = {
     checkbox: {
@@ -35,6 +36,7 @@ const ReferenceCard = ({reference, onEdit, onDelete, onSubmit}) => (
                     <ReferenceCardListItem label='Venue:' icon='home' content={reference.venue}/>
                     <ReferenceCardListItem label='Pages:' icon='book'
                                            content={`${reference.pagesStart}-${reference.pagesEnd}`}/>
+                    <ReferenceCardListTagItem tags={reference.tags}/>
                 </List>
             </Card.Description>
                 <Card.Content style={styles.cardExtra} extra>
