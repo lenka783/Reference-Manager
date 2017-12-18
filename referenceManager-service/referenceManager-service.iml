@@ -6,6 +6,7 @@
         <fileset id="fileset" name="Spring Application Context" removed="false">
           <file>file://$MODULE_DIR$/src/main/java/cz/muni/fi/pa165/referenceManager/service/config/ServiceConfiguration.java</file>
           <file>file://$MODULE_DIR$/../referenceManager-persistence/src/main/java/cz/muni/fi/pa165/referenceManager/PersistenceApplicationContext.java</file>
+          <file>file://$MODULE_DIR$/../referenceManager-persistence/src/main/java/cz/muni/fi/pa165/referenceManager/config/PersistenceApplicationContext.java</file>
         </fileset>
       </configuration>
     </facet>
