@@ -25,6 +25,7 @@ public class UserController {
 
     /**
      * Returns all users.
+     * curl -i -X GET http://localhost:8080/pa165/rest/users
      * @return list of UserDTOs
      */
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -33,9 +34,17 @@ public class UserController {
         return userFacade.getAllUsers();
     }
 
+    /**
+     * Return user with given id.
+     * curl -i -X GET http://localhost:8080/pa165/rest/users/{id}
+     * @param id
+     * @return user with given id
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final UserDTO getUser(@PathVariable("id") long id) {
         logger.debug("rest getUser()");
         return userFacade.findUserById(id);
     }
+
+
 }

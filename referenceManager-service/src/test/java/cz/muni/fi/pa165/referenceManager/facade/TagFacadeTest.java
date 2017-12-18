@@ -83,7 +83,7 @@ public class TagFacadeTest {
 
     @Test
     public void testFindById() {
-        tagFacade.findById(tagDTO);
+        tagFacade.findById(tagDTO.getId());
         Mockito.verify(tagService, Mockito.times(1))
             .findById(tagDTO.getId());
     }
