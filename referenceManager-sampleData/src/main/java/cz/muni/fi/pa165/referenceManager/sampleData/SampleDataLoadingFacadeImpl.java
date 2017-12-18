@@ -41,19 +41,23 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     @Override
     @SuppressWarnings("unused")
     public void loadData() {
-        Note note1 = note("This is the 1st note.");
-        Note note2 = note("This is the 2nd note.");
-        Note note3 = note("This is the 3rd note.");
-        Note note4 = note("This is the 4th note.");
+        Note note1 = note("This highly anticipated new edition of the classic," +
+            " Jolt Award-winning work has been thoroughly updated to cover Java SE 5 " +
+            "and Java SE 6 features introduced since the first edition.");
+        Note note2 = note("Best trilogy ever!");
+        Note note3 = note("Bloch explores new design patterns and language idioms, " +
+            "showing you how to make the most of features ranging from generics to enums, " +
+            "annotations to autoboxing.");
+        Note note4 = note("Check other work of Tolkien.");
         Note note5 = note("This is the 5th note.");
         Note note6 = note("This is the 6th note.");
         log.info("Notes loaded.");
 
-        Reference ref1 = reference("Title",
-            Arrays.asList("Author1", "Author2"), "Brno", 11, 12,
+        Reference ref1 = reference("Effective Java",
+            Arrays.asList("Joshua Bloch"), "USA", 110, 152,
             note1, note3);
-        Reference ref2 = reference("Different title",
-            Arrays.asList("Author"), "Amsterdam", 130, 190,
+        Reference ref2 = reference("Lord of the Rings",
+            Arrays.asList("J. R. R. Tolkien"), "UK", null, null,
             note2, note4);
         Reference ref3 = reference("Another title",
             Arrays.asList("Author1", "Different Author"), "Prague", 34, 67,
@@ -88,7 +92,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     }
 
     private Reference reference(String title, List<String> authors, String venue,
-                                int pagesStart, int pagesEnd, Note... notes) {
+                                Integer pagesStart, Integer pagesEnd, Note... notes) {
         Reference ref = new Reference();
         ref.setTitle(title);
         ref.setAuthors(authors);
