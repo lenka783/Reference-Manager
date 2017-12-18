@@ -39,7 +39,13 @@ public class TagDTO {
         this.references = references;
     }
 
+    public void addReference(ReferenceDTO reference) {
+        references.add(reference);
+    }
 
+    public void removeReference(ReferenceDTO reference) {
+        references.remove(reference);
+    }
 
     @Override
     public boolean equals(Object o) {

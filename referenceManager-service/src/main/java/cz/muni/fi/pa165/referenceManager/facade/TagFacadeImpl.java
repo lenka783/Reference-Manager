@@ -1,6 +1,8 @@
 package cz.muni.fi.pa165.referenceManager.facade;
 
+import cz.muni.fi.pa165.referenceManager.dto.TagCreateDTO;
 import cz.muni.fi.pa165.referenceManager.dto.TagDTO;
+import cz.muni.fi.pa165.referenceManager.dto.TagUpdateDTO;
 import cz.muni.fi.pa165.referenceManager.entity.Tag;
 import cz.muni.fi.pa165.referenceManager.facade.TagFacade;
 import cz.muni.fi.pa165.referenceManager.service.MappingService;
@@ -32,6 +34,13 @@ public class TagFacadeImpl implements TagFacade {
     private MappingService mappingService;
 
     @Override
+    public Long createTag(TagCreateDTO tagCreateDTO) {
+        Tag tag = mappingService.mapTo(tagCreateDTO, Tag.class);
+        tagService.create(tag);
+        return tag.getId();
+    }
+
+    @Override
     public Long createTag(TagDTO tagDTO) {
         Tag tag = mappingService.mapTo(tagDTO, Tag.class);
         tagService.create(tag);
@@ -49,8 +58,8 @@ public class TagFacadeImpl implements TagFacade {
     }
 
     @Override
-    public TagDTO findById(TagDTO tagDTO) {
-        Tag tag = tagService.findById(tagDTO.getId());
+    public TagDTO findById(Long id) {
+        Tag tag = tagService.findById(id);
         return (tag == null) ? null : mappingService.mapTo(tag, TagDTO.class);
     }
 
@@ -73,4 +82,5 @@ public class TagFacadeImpl implements TagFacade {
             referenceService.findById(referenceId)
         );
     }
+
 }
