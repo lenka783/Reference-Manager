@@ -5,18 +5,14 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import 'semantic-ui-css/semantic.min.css';
 import {Provider} from 'react-redux'
-
-import {ConnectedRouter} from 'react-router-redux'
-import {routes} from "./routes";
-import {store, history} from './store/configureStore';
+import {store} from './store/configureStore';
+import MyAppRouter from './router';
 
 ReactDOM.render(<div>
     <Provider store={store}>
-        <App>
-            <ConnectedRouter history={history}>
-                {routes}
-            </ConnectedRouter>
-        </App>
+        <MyAppRouter>
+            <App />
+        </MyAppRouter>
     </Provider>
 </div>, document.getElementById('root'));
 registerServiceWorker();

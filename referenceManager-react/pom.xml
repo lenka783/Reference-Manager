@@ -41,8 +41,9 @@
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.2</version>
                 <configuration>
-                    <url>http://localhost:8080/manager</url>
+                    <url>http://localhost:8080/</url>
                     <path>/pa165</path>
+                    <warSourceDirectory>${basedir}/build</warSourceDirectory>
                 </configuration>
             </plugin>
 
@@ -145,6 +146,9 @@
                                     you can remove this whole <configuration> section.
                                     -->
                                     <arguments>run build</arguments>
+                                    <environmentVariables>
+                                        <PUBLIC_URL>/pa165</PUBLIC_URL>
+                                    </environmentVariables>
                                 </configuration>
                             </execution>
                         </executions>
