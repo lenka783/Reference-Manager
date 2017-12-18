@@ -25,7 +25,7 @@ public class MainController {
      *
      * @return resources uris
      */
-    @RequestMapping(value = "/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = ApiUris.ROOT_URI_MAIN, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final Map<String, String> getResources() {
 
         Map<String,String> resourcesMap = new HashMap<>();

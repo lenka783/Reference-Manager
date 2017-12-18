@@ -63,7 +63,7 @@
         <module>referenceManager-persistence</module>
         <module>referenceManager-service</module>
         <module>referenceManager-sampleData</module>
-        <module>referenceManager-rest</module>
-        <module>referenceManager-react</module>
+        <module>web</module>
+        <!--<module>referenceManager-react</module>-->
     </modules>
 </project>
