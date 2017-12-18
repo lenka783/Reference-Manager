@@ -113,7 +113,6 @@ public class ReferenceController {
         try {
             reference.setId(id);
             referenceFacade.updateReference(reference);
-            logger.error();
             return referenceFacade.getReferenceById(id);
         } catch (Exception ex) {
             throw new ResourceNotFoundException();
