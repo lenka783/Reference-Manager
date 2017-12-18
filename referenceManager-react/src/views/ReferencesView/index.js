@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Card} from 'semantic-ui-react'
+import {Card} from 'semantic-ui-react';
 import faker from 'faker';
 import _ from 'lodash';
 import ReferenceCard from "../../components/ReferenceCard";
