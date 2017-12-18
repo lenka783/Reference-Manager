@@ -96,7 +96,28 @@ public class ReferenceController {
         }
     }
 
+    /**
+     * Update the reference by PUT method
+     *
+     * curl -X PUT -i -H "Content-Type: application/json" --data '{"title":"TEXT", "authors":
+     * ["author1", "author2", "author3"], "venue": "VENUE", "pagesStart": NUM, "pagesEnd": NUM}'
+     * http://localhost:8080/pa165/rest/references/{id}
+     *
+     * @param id identifier for reference
+     */
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    public final ReferenceDTO editReference(@PathVariable("id") Long id, @RequestBody ReferenceUpdateDTO reference) throws Exception {
+        logger.debug("rest editReference()");
 
+        try {
+            reference.setId(id);
+            referenceFacade.updateReference(reference);
+            return referenceFacade.getReferenceById(id);
+        } catch (Exception ex) {
+            throw new ResourceNotFoundException();
+        }
+    }
 
 
 }
